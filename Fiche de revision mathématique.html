@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Math S2 — Fiches de Révision</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea'] }
+        };
+    </script>
+    <style>
+        :root {
+            --bg: #f7f5f0;
+            --sidebar: #1c1917;
+            --sidebar-w: 280px;
+            --card: #ffffff;
+            --accent: #c2410c;
+            --accent-light: #fed7aa;
+            --blue: #1d4ed8;
+            --blue-light: #dbeafe;
+            --green: #15803d;
+            --green-light: #dcfce7;
+            --amber: #b45309;
+            --amber-light: #fef3c7;
+            --red: #b91c1c;
+            --red-light: #fee2e2;
+            --purple: #7c3aed;
+            --purple-light: #ede9fe;
+            --text: #1c1917;
+            --text-muted: #78716c;
+            --border: #e7e5e4;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            min-height: 100vh;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        /* ── SIDEBAR ─────────────────────────────────── */
+        #sidebar {
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--sidebar);
+            position: fixed;
+            top: 0; left: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            padding: 1.75rem 1.5rem 1.25rem;
+            border-bottom: 1px solid #292524;
+        }
+
+        .sidebar-brand h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.25rem;
+            color: #fafaf9;
+            line-height: 1.3;
+        }
+
+        .sidebar-brand .subtitle {
+            font-size: 0.7rem;
+            color: #78716c;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.25rem;
+        }
+
+        .nav-section-label {
+            padding: 1.25rem 1.5rem 0.4rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #57534e;
+            font-weight: 600;
+        }
+
+        .nav-menu { list-style: none; }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.55rem 1.5rem;
+            color: #a8a29e;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 400;
+            transition: all 0.15s;
+            border-left: 2px solid transparent;
+            cursor: pointer;
+            background: none;
+            border-right: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-link:hover { color: #fafaf9; background: #292524; }
+
+        .nav-link.active {
+            color: #fed7aa;
+            background: #292524;
+            border-left-color: var(--accent);
+            font-weight: 500;
+        }
+
+        .nav-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #57534e;
+            min-width: 1.2rem;
+        }
+
+        .nav-link.active .nav-num { color: var(--accent); }
+
+        .nav-quiz {
+            margin: 1rem 1.5rem;
+            background: linear-gradient(135deg, #c2410c, #9a3412);
+            color: white !important;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-weight: 600 !important;
+            font-size: 0.8rem !important;
+            text-align: center;
+            border-left: none !important;
+            justify-content: center;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-quiz:hover { opacity: 0.9; background: linear-gradient(135deg, #9a3412, #7c2d12) !important; }
+        .nav-quiz.active { background: linear-gradient(135deg, #9a3412, #7c2d12) !important; color: white !important; }
+
+        /* ── MAIN ─────────────────────────────────────── */
+        #main-content {
+            margin-left: var(--sidebar-w);
+            padding: 3rem 3.5rem;
+            width: 100%;
+            max-width: calc(var(--sidebar-w) + 920px);
+        }
+
+        .chapter { display: none; }
+        .chapter.active { display: block; animation: fadeUp 0.3s ease-out; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── CHAPTER HEADER ───────────────────────────── */
+        .chapter-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chapter-header .chap-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .chapter-header h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        .chapter-header p {
+            margin-top: 0.6rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ── CARDS ────────────────────────────────────── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.05rem;
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card p { margin-bottom: 0.6rem; }
+        .card p:last-child { margin-bottom: 0; }
+        .card ul, .card ol { padding-left: 1.4rem; }
+        .card li { margin-bottom: 0.4rem; }
+
+        /* Card variants */
+        .card-def    { border-left: 3px solid var(--blue);   background: linear-gradient(to right, var(--blue-light) 0%, white 60%); }
+        .card-thm    { border-left: 3px solid var(--purple); background: linear-gradient(to right, var(--purple-light) 0%, white 60%); }
+        .card-method { border-left: 3px solid var(--green);  background: linear-gradient(to right, var(--green-light) 0%, white 60%); }
+        .card-warn   { border-left: 3px solid var(--amber);  background: linear-gradient(to right, var(--amber-light) 0%, white 60%); }
+        .card-error  { border-left: 3px solid var(--red);    background: linear-gradient(to right, var(--red-light) 0%, white 60%); }
+        .card-tip    { border-left: 3px solid var(--accent);  background: linear-gradient(to right, var(--accent-light) 0%, white 60%); }
+
+        .card-def h3    { color: var(--blue); }
+        .card-thm h3    { color: var(--purple); }
+        .card-method h3 { color: var(--green); }
+        .card-warn h3   { color: var(--amber); }
+        .card-error h3  { color: var(--red); }
+        .card-tip h3    { color: var(--accent); }
+
+        /* ── FORMULA BLOCK ────────────────────────────── */
+        .formula {
+            background: #fafaf9;
+            border: 1px solid #e7e5e4;
+            border-radius: 6px;
+            padding: 1.1rem 1.25rem;
+            margin: 0.8rem 0;
+            font-size: 0.95rem;
+            overflow-x: auto;
+        }
+
+        .formula-inline {
+            display: inline-block;
+            background: #f5f5f4;
+            border-radius: 4px;
+            padding: 0.1rem 0.4rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+        }
+
+        /* ── TWO-COL GRID ─────────────────────────────── */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+
+        /* ── TAGS ─────────────────────────────────────── */
+        .tag {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-right: 0.4rem;
+        }
+
+        .tag-def    { background: var(--blue-light);   color: var(--blue); }
+        .tag-thm    { background: var(--purple-light); color: var(--purple); }
+        .tag-method { background: var(--green-light);  color: var(--green); }
+        .tag-warn   { background: var(--amber-light);  color: var(--amber); }
+        .tag-error  { background: var(--red-light);    color: var(--red); }
+
+        /* ── TABLE ────────────────────────────────────── */
+        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        th { background: #f5f5f4; padding: 0.6rem 0.9rem; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--border); }
+        tr:last-child td { border-bottom: none; }
+
+        /* ── STEPS ────────────────────────────────────── */
+        .steps { counter-reset: step; list-style: none; padding: 0; }
+        .steps li {
+            counter-increment: step;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+        .steps li::before {
+            content: counter(step);
+            min-width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            background: var(--text);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .card-method .steps li::before { background: var(--green); }
+
+        /* ── QUIZ ─────────────────────────────────────── */
+        #quiz-container { margin-bottom: 1.5rem; }
+
+        .quiz-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.4rem 1.75rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: border-color 0.2s;
+        }
+
+        .quiz-item.correct { border-color: var(--green); background: var(--green-light); }
+        .quiz-item.wrong   { border-color: var(--red);   background: var(--red-light); }
+
+        .quiz-question {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        .quiz-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-size: 0.9rem;
+        }
+
+        .quiz-options label:hover { border-color: var(--accent); background: var(--accent-light); }
+
+        .quiz-options input[type="radio"] { accent-color: var(--accent); }
+
+        .quiz-feedback {
+            margin-top: 0.75rem;
+            padding: 0.6rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        .quiz-item.correct .quiz-feedback { display: block; background: #bbf7d0; color: #14532d; }
+        .quiz-item.wrong   .quiz-feedback { display: block; background: #fecaca; color: #7f1d1d; }
+
+        .btn-quiz {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: opacity 0.15s;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-quiz:hover { opacity: 0.88; }
+
+        .btn-reset {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'DM Sans', sans-serif;
+            margin-left: 0.75rem;
+            transition: all 0.15s;
+        }
+
+        .btn-reset:hover { border-color: var(--text-muted); color: var(--text); }
+
+        #quiz-score {
+            margin-top: 1.25rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: none;
+        }
+
+        .score-perfect { background: var(--green-light); color: var(--green); border: 1px solid #86efac; }
+        .score-good    { background: var(--blue-light);  color: var(--blue);  border: 1px solid #93c5fd; }
+        .score-bad     { background: var(--red-light);   color: var(--red);   border: 1px solid #fca5a5; }
+
+        /* ── PROGRESS BAR ─────────────────────────────── */
+        .progress-wrap { margin-bottom: 2rem; }
+        .progress-bar-bg { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--accent); transition: width 0.4s; }
+
+        /* ── RESPONSIVE ───────────────────────────────── */
+        @media (max-width: 900px) {
+            #sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+            #sidebar.open { transform: translateX(0); }
+            #main-content { margin-left: 0; padding: 1.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .hamburger { display: flex; }
+        }
+
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 1rem; left: 1rem;
+            z-index: 200;
+            background: var(--sidebar);
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hamburger span { display: block; width: 20px; height: 2px; background: white; border-radius: 1px; }
+    </style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+    <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar">
+    <div class="sidebar-brand">
+        <h1>Expert Math S2</h1>
+        <div class="subtitle">Fiches de révision complètes</div>
+    </div>
+
+    <div class="nav-section-label">Chapitres</div>
+    <ul class="nav-menu">
+        <li><button class="nav-link active" onclick="showChapter('chap1')"><span class="nav-num">01</span>Parties de ℝ²</button></li>
+        <li><button class="nav-link" onclick="showChapter('chap2')"><span class="nav-num">02</span>Fonctions de 2 variables</button></li>
+        <li><button class="nav-link" onclick="showChapter('chap3')"><span class="nav-num">03</span>Calcul différentiel</button></li>
+        <li><button class="nav-link" onclick="showChapter('chap4')"><span class="nav-num">04</span>Extrema & Optimisation</button></li>
+        <li><button class="nav-link" onclick="showChapter('chap5')"><span class="nav-num">05</span>Matrices</button></li>
+        <li><button class="nav-link" onclick="showChapter('chap6')"><span class="nav-num">06</span>Polynômes réels</button></li>
+        <li><button class="nav-link" onclick="showChapter('chap7')"><span class="nav-num">07</span>Nombres complexes</button></li>
+        <li><button class="nav-link" onclick="showChapter('chap8')"><span class="nav-num">08</span>Factorisation ℝ & ℂ</button></li>
+    </ul>
+
+    <div class="nav-section-label">Évaluation</div>
+    <ul class="nav-menu">
+        <li><button class="nav-link nav-quiz" onclick="showChapter('quiz')">⚡ Quiz d'auto-évaluation</button></li>
+    </ul>
+</nav>
+
+<main id="main-content">
+
+<!-- ══════════════════════════════════════════════════════
+     CHAPITRE 1 — Parties de R²
+══════════════════════════════════════════════════════ -->
+<section id="chap1" class="chapter active">
+    <div class="chapter-header">
+        <div class="chap-label">Chapitre 1</div>
+        <h2>Parties de \( \mathbb{R}^2 \)</h2>
+        <p>Topologie de base : ouverts, fermés, bornés, compacts.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Boule ouverte</h3>
+        <p>La <strong>boule ouverte</strong> de centre \( P_0 = (x_0, y_0) \) et de rayon \( r > 0 \) est :</p>
+        <div class="formula">\[ B(P_0, r) = \{ (x,y) \in \mathbb{R}^2 \mid \|(x,y) - P_0\| < r \} \]</div>
+        <p>où \( \|(x,y)\| = \sqrt{x^2 + y^2} \) est la norme euclidienne.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Propriétés de la Norme et des Boules</h3>
+        <ul>
+            <li><strong>Propriétés de la Norme :</strong> \(\|P\| = 0 \iff P=0\) ; \(\|\lambda P\| = |\lambda| \cdot \|P\|\) ; \(\|P+Q\| \le \|P\| + \|Q\|\).</li>
+            <li><strong>Lien Distance-Norme :</strong> \(d(P, Q) = \|P - Q\|\).</li>
+            <li><strong>Résultat Topologique :</strong> Toute boule ouverte est un <strong>ouvert</strong>. Toute boule fermée \(\overline{B}(P_0,r) = \{(x,y) \mid \|(x,y)-P_0\| \leq r\}\) est un <strong>fermé</strong>.</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Intérieur, Adhérence et Frontière</h3>
+        <p>Soit \( A \subset \mathbb{R}^2 \). On définit :</p>
+        <ul>
+            <li><strong>Intérieur \( \mathring{A} \) :</strong> \( P \in \mathring{A} \iff \exists r > 0,\; B(P,r) \subset A \)</li>
+            <li><strong>Adhérence \( \bar{A} \) :</strong> \( P \in \bar{A} \iff \forall r > 0,\; B(P,r) \cap A \neq \emptyset \)</li>
+            <li><strong>Frontière \( \partial A \) :</strong> \( \partial A = \bar{A} \setminus \mathring{A} \)</li>
+        </ul>
+    </div>
+
+    <div class="grid-2">
+        <div class="card card-def">
+            <h3>Ouvert / Fermé</h3>
+            <ul>
+                <li><strong>Ouvert :</strong> \( A = \mathring{A} \) (tout point est intérieur)</li>
+                <li><strong>Fermé :</strong> \( A = \bar{A} \) (contient sa frontière)</li>
+                <li>Le complémentaire d'un ouvert est fermé, et réciproquement.</li>
+            </ul>
+        </div>
+        <div class="card card-def">
+            <h3>Borné / Compact</h3>
+            <ul>
+                <li><strong>Borné :</strong> \( \exists M > 0,\; \forall P \in A,\; \|P\| \leq M \)</li>
+                <li><strong>Compact :</strong> fermé <em>et</em> borné (dans \( \mathbb{R}^n \))</li>
+                <li>Exemple compact : \( [a,b] \times [c,d] \)</li>
+                <li><strong>Stabilité :</strong> L'intersection et la réunion de deux parties bornées sont des parties bornées.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card card-def">
+        <h3>Connexité par arcs</h3>
+        <p>Une partie \( A \) est <strong>connexe par arcs</strong> si pour tous \( P, Q \in A \), il existe un chemin continu \( \gamma : [0,1] \to A \) tel que \( \gamma(0) = P \) et \( \gamma(1) = Q \).</p>
+        <p><em>Propriété clé :</em> Tout ouvert connexe par arcs de \( \mathbb{R}^2 \) est appelé un <strong>domaine</strong>.</p>
+    </div>
+
+
+    <div class="card card-def">
+    <h3>Propriétés fondamentales de la distance</h3>
+    <p>Pour tout triplet \((P_1, P_2, P_3)\) de points de \(\mathbb{R}^2\)[cite: 36]:</p>
+    <ul>
+        <li><strong>Séparation :</strong> \(d(P_1, P_2) = 0 \iff P_1 = P_2\)[cite: 37, 43].</li>
+        <li><strong>Symétrie :</strong> \(d(P_1, P_2) = d(P_2, P_1)\)[cite: 38, 44].</li>
+        <li><strong>Inégalité triangulaire :</strong> \(d(P_1, P_3) \le d(P_1, P_2) + d(P_2, P_3)\)[cite: 39, 45].</li>
+    </ul>
+</div>
+
+    <div class="card card-def">
+        <h3>Notions complémentaires</h3>
+        <ul>
+            <li><strong>Positivité :</strong> Pour tous points \(P, Q\) de \(\mathbb{R}^2\), \(d(P, Q) \ge 0\).</li>
+            <li><strong>Voisinage :</strong> Un ensemble \(V\) est un <strong>voisinage</strong> de \(P\) s'il existe un ouvert \(U\) tel que \(P \in U \subset V\).</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Opérations sur les Ouverts et Fermés</h3>
+        <ul>
+            <li><strong>Ouverts :</strong> Toute réunion d'ouverts est un ouvert[cite: 104, 206]. L'intersection d'un nombre <strong>fini</strong> d'ouverts est un ouvert[cite: 106, 214].</li>
+            <li><strong>Fermés :</strong> Toute intersection de fermés est un fermé[cite: 116, 223]. La réunion d'un nombre <strong>fini</strong> de fermés est un fermé[cite: 117, 228].</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Propriétés Structurelles</h3>
+        <ul>
+            <li>L'<strong>intérieur</strong> \(\mathring{A}\) est toujours un <strong>ouvert</strong> (le plus grand ouvert contenu dans \(A\)).</li>
+            <li>L'<strong>adhérence</strong> \(\bar{A}\) est toujours un <strong>fermé</strong> (le plus petit fermé contenant \(A\)).</li>
+            <li><strong>Intersection infinie :</strong> L'intersection d'une famille quelconque (même infinie) de fermés est un <strong>fermé</strong>.</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Exemples d'Intérieurs</h3>
+        <ul>
+            <li>L'intérieur de la boule unité fermée est la boule unité ouverte[cite: 144].</li>
+            <li>L'intérieur de l'ensemble \(E = \{(x,y) \in \mathbb{R}^2 ; xy=0\}\) (les deux axes) est l'ensemble vide \(\emptyset\)[cite: 145].</li>
+        </ul>
+    </div>
+
+    <div class="card card-error">
+        <h3>⚠️ Erreurs fréquentes</h3>
+        <ul>
+            <li><strong>Borné ≠ Fermé :</strong> La boule ouverte \( B(0,1) \) est bornée mais <em>pas</em> fermée.</li>
+            <li><strong>Non-ouvert ≠ Fermé :</strong> \( [0,1[ \) n'est ni ouvert ni fermé.</li>
+            <li><strong>Exemple 2D :</strong> L'ensemble \(\{(x,y)\in\mathbb{R}^2 \mid x+y>0 \text{ et } x-y\ge 0\}\) n'est ni ouvert (la frontière \(x-y=0\) est incluse) ni fermé (la frontière \(x+y=0\) est exclue).</li>
+            <li><strong>\(\mathbb{R}^2\) et \(\emptyset\) :</strong> sont à la fois ouverts ET fermés.</li>
+        </ul>
+    </div>
+    <div class="card card-def">
+        <h3>Suites dans \(\mathbb{R}^2\) : définition formelle</h3>
+        <p>Une suite à valeurs dans \(\mathbb{R}^2\) consiste en la donnée de <strong>deux suites réelles</strong> \((a_n)_{n\in\mathbb{N}}\) et \((b_n)_{n\in\mathbb{N}}\), et s'écrit \(((a_n, b_n))_{n\in\mathbb{N}}\).</p>
+        <p><strong>Unicité de la limite :</strong> Si une suite \((P_n)\) converge, sa limite est <strong>unique</strong>. Autrement dit, si \(P_n \to (a,b)\) et \(P_n \to (a',b')\), alors \((a,b) = (a',b')\).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Suites et Convergence dans \(\mathbb{R}^2\)</h3>
+        <p>Une suite de points \((u_n, v_n)\) converge vers \((a,b)\) si et seulement si les deux suites de réels convergent séparément : \(\lim u_n = a\) et \(\lim v_n = b\).</p>
+        <p><strong>Théorème de Bolzano-Weierstrass :</strong> Toute suite bornée dans \(\mathbb{R}^2\) admet une sous-suite convergente.</p>
+        <p><strong>Application :</strong> Si \(K\) est compact et \((P_n)\) est une suite de points de \(K\), alors il existe une sous-suite \((P_{\varphi(n)})\) qui converge vers un point de \(K\).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Caractérisation topologique de la convergence</h3>
+        <p>Une suite \((P_n)\) converge vers \((a,b)\) si et seulement si :</p>
+        <div class="formula">\[ \forall \text{ boule ouverte } B \text{ centrée en } (a,b),\; \exists N \in \mathbb{N},\; \forall n \ge N : P_n \in B \]</div>
+        <p>Autrement dit, à partir d'un certain rang, tous les termes de la suite appartiennent à toute boule aussi petite soit-elle autour de la limite. C'est la traduction topologique de la définition métrique \(d(P_n, (a,b)) \to 0\).</p>
+    </div>
+
+    <div class="card card-warn">
+        <h3>⚠️ Contre-exemple : bornée ≠ convergente</h3>
+        <p>Bolzano-Weierstrass garantit l'existence d'une <em>sous-suite</em> convergente, mais <strong>pas la convergence de la suite entière</strong>.</p>
+        <p><strong>Exemple canonique :</strong> La suite \(u_n = ((-1)^n, 0)\) est bornée (tous ses points sont dans la boule de rayon 1), mais elle <strong>diverge</strong> : ses sous-suites paires convergent vers \((1,0)\) et ses sous-suites impaires vers \((-1,0)\).</p>
+        <p>Autrement dit : bornée ⟹ extraction d'une sous-suite convergente, mais bornée ⟹̸ convergente.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Caractérisation séquentielle des fermés</h3>
+        <p>Un ensemble \(F \subset \mathbb{R}^2\) est <strong>fermé</strong> si et seulement si il est <strong>stable par limite de suites</strong> :</p>
+        <div class="formula">\[ F \text{ fermé} \iff \left[ (P_n) \subset F,\; P_n \to L \implies L \in F \right] \]</div>
+        <p>Autrement dit : toute suite de points de \(F\) qui converge a sa limite dans \(F\).</p>
+        <p><strong>Corollaire :</strong> Pour montrer qu'un ensemble n'est pas fermé, il suffit d'exhiber une suite convergente dans l'ensemble dont la limite est à l'extérieur.</p>
+    </div>
+
+    <div class="card card-thm">
+    <h3>Inégalité de Cauchy-Schwarz</h3>
+    <p>Pour tous réels \(x_1, \dots, x_n\) et \(y_1, \dots, y_n\) : </p>
+    <div class="formula">
+        \[ |\sum_{i=1}^{n}x_{i}y_{i}| \le \sqrt{\sum_{i=1}^{n}x_{i}^{2}}\sqrt{\sum_{i=1}^{n}y_{i}^{2}} \]
+    </div>
+    <p>C'est cette inégalité qui permet de démontrer l'inégalité triangulaire dans \(\mathbb{R}^2\)[cite: 2407].</p>
+</div>
+
+    <div class="card card-def">
+        <h3>Suite bornée</h3>
+        <p>Une suite \(((a_n, b_n))\) est dite <strong>bornée</strong> si l'ensemble de ses points est une partie bornée de \(\mathbb{R}^2\)[cite: 2522, 2523].</p>
+        <p><strong>Propriété :</strong> Toute suite de \(\mathbb{R}^2\) convergente est bornée (la réciproque est fausse)[cite: 2527, 2528, 2535].</p>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CHAPITRE 2 — Fonctions de 2 variables
+══════════════════════════════════════════════════════ -->
+<section id="chap2" class="chapter">
+    <div class="chapter-header">
+        <div class="chap-label">Chapitre 2</div>
+        <h2>Fonctions de 2 variables</h2>
+        <p>Limites, continuité et étude locale des fonctions \( f : \mathbb{R}^2 \to \mathbb{R} \).</p>
+    </div>
+
+
+    <div class="card card-thm">
+        <h3>Unicité de la limite</h3>
+        <p>Si une fonction \(f\) admet une limite \(\ell\) en un point \((a,b)\), alors cette limite est <strong>unique</strong>[cite: 2642, 2643].</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Définition et représentation</h3>
+        <p>Une fonction de deux variables est une application \( f : D \subset \mathbb{R}^2 \to \mathbb{R} \), \( (x,y) \mapsto f(x,y) \).</p>
+        <ul>
+            <li><strong>Courbes de niveau :</strong> Ensemble \( \{ (x,y) \mid f(x,y) = k \} \) pour \( k \in \mathbb{R} \).</li>
+            <li><strong>Graphe :</strong> Surface dans \( \mathbb{R}^3 \) d'équation \( z = f(x,y) \).</li>
+            <li><strong>Domaine de définition :</strong> Chercher les contraintes (log, racine, fraction…).</li>
+        </ul>
+    </div>
+
+    <div class="card card-method">
+        <h3>Méthode : Déterminer un domaine de définition</h3>
+        <p>Identifier les contraintes de chaque sous-expression :</p>
+        <ol class="steps">
+            <li><strong>Racine carrée :</strong> \( \sqrt{u(x,y)} \implies u(x,y) \geq 0 \). Exemple : \( \sqrt{1-x^2-y^2} \) est définie sur le disque unité fermé \(x^2+y^2 \leq 1\).</li>
+            <li><strong>Dénominateur :</strong> \( \dfrac{P(x,y)}{Q(x,y)} \implies Q(x,y) \neq 0 \). Exemple : \( \dfrac{x+y}{x-y} \) est définie partout sauf sur la droite \( y=x \).</li>
+            <li><strong>Logarithme :</strong> \( \ln(u(x,y)) \implies u(x,y) > 0 \). Exemple : \(\ln(1-x^2-y^2)\) est définie sur le disque ouvert \(x^2+y^2 < 1\).</li>
+        </ol>
+    </div>
+
+    <div class="card card-def">
+        <h3>Applications partielles</h3>
+        <p>Soit \( f: D \subset \mathbb{R}^2 \to \mathbb{R} \). En fixant une variable au point \( (a,b) \), on définit :</p>
+        <ul>
+            <li><strong>Première application partielle :</strong> \( f_1 : x \mapsto f(x, b) \) (on fixe \( y = b \))</li>
+            <li><strong>Seconde application partielle :</strong> \( f_2 : y \mapsto f(a, y) \) (on fixe \( x = a \))</li>
+        </ul>
+        <p><strong>Théorème :</strong> Si \( f \) est continue en \( (a,b) \), alors \( f_1 \) est continue en \( a \) et \( f_2 \) est continue en \( b \).</p>
+        <p><strong>⚠️ Réciproque fausse :</strong> La continuité de \( f_1 \) et \( f_2 \) en tout point n'implique <em>pas</em> la continuité globale de \( f \). La continuité des applications partielles est une condition <strong>nécessaire mais non suffisante</strong>.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Limite en un point</h3>
+        <p>On dit que \( f \) a pour limite \( \ell \) en \( (a,b) \) si :</p>
+        <div class="formula">\[ \forall \varepsilon > 0,\; \exists \delta > 0 \text{ tel que } \|(x,y)-(a,b)\| < \delta \implies |f(x,y) - \ell| < \varepsilon \]</div>
+        <p><strong>Notation :</strong> \( \displaystyle\lim_{(x,y) \to (a,b)} f(x,y) = \ell \)</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Prouver qu'une limite n'existe pas</h3>
+        <p>Il suffit de trouver deux chemins donnant des limites différentes.</p>
+        <ul>
+            <li><strong>Chemin 1 :</strong> \( y = 0 \) (axe des abscisses)</li>
+            <li><strong>Chemin 2 :</strong> \( y = x \) (diagonale)</li>
+            <li><strong>Chemin 3 :</strong> \( y = mx \) ou \( y = x^2 \) si les deux premiers échouent</li>
+        </ul>
+        <p>Si les limites diffèrent selon le chemin, la limite globale <strong>n'existe pas</strong>.</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Prouver qu'une limite existe (majoration)</h3>
+        <p>On pose \( r = \|(x,y)-(a,b)\| \) et on majore \( |f(x,y) - \ell| \) par une expression en \( r \) tendant vers 0.</p>
+        <div class="formula">\[ |f(x,y) - \ell| \leq C \cdot r^{\alpha} \xrightarrow[r \to 0]{} 0 \quad (\alpha > 0) \]</div>
+        <p><strong>Astuce :</strong> Utiliser \( |x| \leq r \) et \( |y| \leq r \) où \( r = \sqrt{x^2+y^2} \). En coordonnées polaires : \( x = r\cos\theta,\; y = r\sin\theta \).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>🎯 Méthode des coordonnées polaires</h3>
+        <p>Pour étudier une limite en \((0,0)\), on pose \(x = r\cos\theta\), \(y = r\sin\theta\) et on examine le comportement quand \(r \to 0^+\).</p>
+        <p><strong>Règle d'or :</strong> si \(|f(r\cos\theta, r\sin\theta)| \leq C(r)\) avec \(C(r) \to 0\) <em>indépendamment</em> de \(\theta\), alors \(\displaystyle\lim_{(x,y)\to(0,0)} f(x,y) = 0\).</p>
+        <div class="formula">
+            \[ f(x,y) = \frac{x^2 y}{x^2+y^2} \xrightarrow[\text{polaire}]{} r\cos^2\theta\sin\theta \to 0 \quad \text{car } |f| \leq r \]
+        </div>
+        <p><strong>⚠️ Attention :</strong> si le majorant dépend de \(\theta\) et ne tend pas vers 0 uniformément, la méthode ne conclut pas — il faut tester des chemins.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Continuité</h3>
+        <p>\( f \) est <strong>continue en \( (a,b) \)</strong> si \( \displaystyle\lim_{(x,y)\to(a,b)} f(x,y) = f(a,b) \).</p>
+        <p><strong>Propriétés :</strong> Somme, produit, composée, quotient (si dénominateur ≠ 0) de fonctions continues sont continues. Les fonctions polynomiales et rationnelles (là où définies) sont continues.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Continuité sur un ensemble</h3>
+        <p>Une fonction \(f\) est dite <strong>continue sur un ensemble \(D\)</strong> si elle est continue en tout point \((a,b)\) de \(D\).</p>
+        <p><strong>Théorème des bornes atteintes (Weierstrass) :</strong> Toute fonction continue sur un <strong>compact</strong> est bornée et atteint ses bornes (son maximum et son minimum sont effectivement atteints).</p>
+    </div>
+
+    <div class="card card-warn">
+        <h3>⚠️ Limites itérées ≠ Limite double</h3>
+        <p>L'existence des limites itérées \( \displaystyle\lim_{x\to a} \lim_{y\to b} f(x,y) \) et \( \displaystyle\lim_{y\to b} \lim_{x\to a} f(x,y) \) (même si elles coïncident) <strong>ne garantit pas</strong> l'existence de la limite double.</p>
+        <div class="formula">\[ \text{Exemple : } f(x,y) = \frac{xy}{x^2+y^2} \]</div>
+        <p>Les deux limites itérées valent 0, mais la limite double n'existe pas (prendre \( y = x \) donne \( \frac{1}{2} \)).</p>
+    </div>
+
+    <div class="card definition">
+        <h3>Caractérisation séquentielle & Composition</h3>
+        <ul>
+            <li><strong>Caractérisation séquentielle :</strong> \(f\) est continue en \(A\) ssi pour toute suite \((X_n)\) tendant vers \(A\), on a \(\lim f(X_n) = f(A)\).</li>
+            <li><strong>Composition :</strong> Si \(f\) est continue en \((a,b)\) et \(g\) est une fonction d'une variable continue en \(f(a,b)\), alors \(g \circ f\) est continue en \((a,b)\).</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Stabilité de la continuité</h3>
+        <p>Les sommes, produits et quotients (là où le dénominateur ne s'annule pas) de fonctions continues sont des fonctions continues sur leur domaine de définition[cite: 336].</p>
+    </div>
+
+    <div class="card warning">
+        <h3>Remarque sur la continuité séquentielle</h3>
+        <p>On utilise souvent la proposition de <strong>continuité séquentielle</strong> pour démontrer qu'une fonction <strong>n'est pas continue</strong> en un point (en trouvant une suite qui converge vers le point mais dont l'image ne converge pas vers la valeur de la fonction)[cite: 341].</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Prolongation par continuité</h3>
+        <p>Si \(f\) est définie et continue sur \(D\) privé d'un point \((a,b)\), et si \(\displaystyle\lim_{(x,y)\to(a,b)} f(x,y) = \ell\) existe, on peut <strong>prolonger \(f\) par continuité</strong> en posant :</p>
+        <div class="formula">\[ \tilde{f}(x,y) = \begin{cases} f(x,y) & \text{si } (x,y) \neq (a,b) \\ \ell & \text{si } (x,y) = (a,b) \end{cases} \]</div>
+        <p>La fonction \(\tilde{f}\) est alors continue sur \(D \cup \{(a,b)\}\).</p>
+        <p><strong>Exemple classique :</strong> \(f(x,y) = \dfrac{\sin(x^2+y^2)}{x^2+y^2}\) se prolonge en \((0,0)\) avec valeur \(1\).</p>
+    </div>
+
+<!-- ══════════════════════════════════════════════════════
+     CHAPITRE 3 — Calcul différentiel
+══════════════════════════════════════════════════════ -->
+<section id="chap3" class="chapter">
+    <div class="chapter-header">
+        <div class="chap-label">Chapitre 3</div>
+        <h2>Calcul différentiel</h2>
+        <p>Dérivées partielles, différentiabilité, gradient et règle de la chaîne.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Rappel : Dérivabilité en 1D</h3>
+        <p>Soit \(f : \mathbb{R} \to \mathbb{R}\). Le <strong>nombre dérivé</strong> de \(f\) en \(a\) est :</p>
+        <div class="formula">\[ f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h} \]</div>
+        <p>Si cette limite existe, la <strong>droite tangente</strong> au graphe en \((a, f(a))\) a pour équation :</p>
+        <div class="formula">\[ y = f(a) + f'(a)(x - a) \]</div>
+        <p>En 2D, ce concept se généralise : la différentiabilité définit le <em>plan tangent</em> au graphe de \(f\).</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Dérivées partielles</h3>
+        <p>La dérivée partielle de \( f \) par rapport à \( x \) en \( (a,b) \) est :</p>
+        <div class="formula">\[ \frac{\partial f}{\partial x}(a,b) = \lim_{h \to 0} \frac{f(a+h, b) - f(a,b)}{h} \]</div>
+        <p><strong>En pratique :</strong> on dérive par rapport à \( x \) en traitant \( y \) comme une constante (et vice-versa).</p>
+        <p><strong>Notations alternatives :</strong> On note aussi \(D_1 f(a,b)\) pour la dérivée par rapport à la <em>première</em> variable et \(D_2 f(a,b)\) pour la <em>seconde</em>.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Hiérarchie de régularité</h3>
+        <div class="formula">\[ f \in \mathcal{C}^1 \implies f \text{ différentiable} \implies f \text{ continue} \implies f \text{ admet des } \tfrac{\partial f}{\partial x_i} \]</div>
+        <p><strong>Les réciproques sont toutes fausses !</strong> L'existence des dérivées partielles n'implique pas la différentiabilité.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Condition suffisante de différentiabilité</h3>
+        <p>Si les dérivées partielles \(\dfrac{\partial f}{\partial x}\) et \(\dfrac{\partial f}{\partial y}\) <strong>existent</strong> au voisinage de \((a,b)\) et sont <strong>continues</strong> en \((a,b)\), alors \(f\) est <strong>différentiable</strong> en \((a,b)\).</p>
+        <p>En pratique : <strong>f ∈ C¹ en (a,b) ⟹ f différentiable en (a,b)</strong>. C'est le critère utilisé pour vérifier la différentiabilité sans recourir à la définition.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Différentiabilité et dérivées directionnelles</h3>
+        <p>Si \(f\) est <strong>différentiable</strong> en \(A\), alors elle admet une dérivée directionnelle suivant <em>tout</em> vecteur \(\vec{u}\), et la formule est garantie :</p>
+        <div class="formula">\[ D_{\vec{u}} f(A) = \vec{\nabla} f(A) \cdot \vec{u} \]</div>
+        <p><strong>⚠️ Réciproque fausse :</strong> L'existence de toutes les dérivées directionnelles n'implique pas la différentiabilité.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Différentiabilité et différentielle</h3>
+        <p>\( f \) est <strong>différentiable en \( (a,b) \)</strong> s'il existe une application linéaire \( L \) telle que :</p>
+        <div class="formula">\[ f(a+h, b+k) = f(a,b) + L(h,k) + o(\|(h,k)\|) \]</div>
+        <p>Si \( f \) est différentiable, alors \( L(h,k) = \dfrac{\partial f}{\partial x}h + \dfrac{\partial f}{\partial y}k \) et on note \( df = \dfrac{\partial f}{\partial x}dx + \dfrac{\partial f}{\partial y}dy \).</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>L'application Différentielle</h3>
+        <p>La différentielle de \(f\) au point \(A = (a,b)\), notée \(df_A\), est l'<strong>application linéaire</strong> qui à tout vecteur \(\vec{h} = (h,k)\) associe :</p>
+        <div class="formula">\[ df_A(h,k) = \frac{\partial f}{\partial x}(A) \cdot h + \frac{\partial f}{\partial y}(A) \cdot k \]</div>
+    </div>
+
+    <div class="card card-tip">
+        <h3>Approximation linéaire (interprétation concrète)</h3>
+        <p>Lorsque \(f\) est différentiable en \(A = (a,b)\), pour un vecteur déplacement \(\vec{h} = (h,k)\) <em>petit</em> :</p>
+        <div class="formula">\[ f(A + \vec{h}) \approx f(A) + df_A(\vec{h}) = f(a,b) + \frac{\partial f}{\partial x}(a,b)\,h + \frac{\partial f}{\partial y}(a,b)\,k \]</div>
+        <p>Cela signifie que le graphe de \(f\) est <em>localement</em> approximé par son plan tangent. C'est la généralisation à 2D de la tangente en 1D.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Gradient</h3>
+        <div class="formula">\[ \vec{\nabla} f(a,b) = \left(\frac{\partial f}{\partial x}(a,b),\; \frac{\partial f}{\partial y}(a,b)\right) \]</div>
+        <ul>
+            <li>Le gradient pointe dans la direction de plus grande croissance de \( f \).</li>
+            <li>Le gradient est <strong>perpendiculaire</strong> aux courbes de niveau.</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Dérivée directionnelle</h3>
+        <p>Soit \( \vec{u} = (u_x, u_y) \) un vecteur <strong>unitaire</strong> (\( \|\vec{u}\| = 1 \)). La dérivée directionnelle est :</p>
+        <div class="formula">\[ D_{\vec{u}} f(a,b) = \vec{\nabla} f(a,b) \cdot \vec{u} = \frac{\partial f}{\partial x}u_x + \frac{\partial f}{\partial y}u_y \]</div>
+        <p><strong>Maximum :</strong> La dérivée directionnelle est maximale quand \( \vec{u} = \frac{\vec{\nabla}f}{\|\vec{\nabla}f\|} \), et vaut \( \|\vec{\nabla}f\| \).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Théorème de Schwarz</h3>
+        <p>Si \( f \in \mathcal{C}^2 \) (dérivées secondes continues), alors :</p>
+        <div class="formula">\[ \frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x} \]</div>
+        <p>Les dérivées partielles croisées sont égales.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Règle de la chaîne</h3>
+        <p>Si \( z = f(x(t), y(t)) \) avec \( f, x, y \) différentiables :</p>
+        <div class="formula">\[ \frac{dz}{dt} = \frac{\partial f}{\partial x}\,\frac{dx}{dt} + \frac{\partial f}{\partial y}\,\frac{dy}{dt} \]</div>
+        <p>Si \( z = f(x(s,t),\, y(s,t)) \) :</p>
+        <div class="formula">\[ \frac{\partial z}{\partial s} = \frac{\partial f}{\partial x}\frac{\partial x}{\partial s} + \frac{\partial f}{\partial y}\frac{\partial y}{\partial s} \]</div>
+    </div>
+
+    <div class="card card-method">
+        <h3>Équation du plan tangent</h3>
+        <p>Le plan tangent au graphe de \( f \) au point \( (a, b, f(a,b)) \) est :</p>
+        <div class="formula">\[ z = f(a,b) + \frac{\partial f}{\partial x}(a,b)\,(x-a) + \frac{\partial f}{\partial y}(a,b)\,(y-b) \]</div>
+    </div>
+
+    <div class="card card-def">
+        <h3>Définition des classes \(\mathcal{C}^k\)</h3>
+        <p>On définit par récurrence la classe \(\mathcal{C}^k\) des fonctions \(k\) fois continûment dérivables[cite: 465]:</p>
+        <ul>
+            <li>\(f\) est de classe \(\mathcal{C}^{k+1}\) si elle est dérivable et si sa dérivée \(f'\) est de classe \(\mathcal{C}^k\).</li>
+            <li>On a la hiérarchie : \(\mathcal{C}^0 \supset \mathcal{C}^1 \supset \mathcal{C}^2 \dots \supset \mathcal{C}^\infty\)[cite: 467, 469].</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Théorème des Accroissements Finis (1D)</h3>
+        <p>Soit \(f\) continue sur \([a,b]\) et dérivable sur \(]a,b[\)[cite: 482]. Il existe \(c \in ]a,b[\) tel que[cite: 483]:</p>
+        <div class="formula">
+            \[ f(b) - f(a) = f'(c)(b - a) \]
+        </div>
+        <p>Ce résultat fondamental est utilisé pour démontrer la différentiabilité en 2D[cite: 480].</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Développement de Taylor-Young (Ordre 2)</h3>
+        <p>Si \(f\) est de classe \(\mathcal{C}^2\), au voisinage de \((h,k)=(0,0)\) :</p>
+        <div class="formula" style="font-size: 0.9em;">
+            \[ f(a+h, b+k) = f(a,b) + \left( \frac{\partial f}{\partial x}h + \frac{\partial f}{\partial y}k \right) + \frac{1}{2} \left( \frac{\partial^2 f}{\partial x^2}h^2 + 2\frac{\partial^2 f}{\partial x \partial y}hk + \frac{\partial^2 f}{\partial y^2}k^2 \right) + \|(h,k)\|^2 \varepsilon(h,k) \]
+        </div>
+        <p>où \(\varepsilon(h,k) \to 0\) quand \((h,k) \to (0,0)\). Ce développement est la base de l'étude des points critiques via la Hessienne.</p>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CHAPITRE 4 — Extrema
+══════════════════════════════════════════════════════ -->
+<section id="chap4" class="chapter">
+    <div class="chapter-header">
+        <div class="chap-label">Chapitre 4</div>
+        <h2>Extrema locaux et globaux</h2>
+        <p>Points critiques, matrice hessienne, optimisation sur un compact.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Rappels : Extrema en 1D</h3>
+        <p>Soit \( f : \mathbb{R} \to \mathbb{R} \). On dit que \( f \) admet un <strong>maximum local</strong> en \( a \) s'il existe un intervalle ouvert \( I \) contenant \( a \) tel que :</p>
+        <div class="formula">\[ \forall x \in I,\quad f(x) \leq f(a) \]</div>
+        <p>Le maximum est dit <strong>strict</strong> si \( f(x) < f(a) \) pour tout \( x \neq a \). Les définitions sont analogues pour le minimum local. Ces notions se généralisent directement à \(\mathbb{R}^2\) en remplaçant \(I\) par une boule ouverte.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Points critiques</h3>
+        <p><strong>Condition nécessaire du premier ordre :</strong> Si \( f \) est différentiable et admet un extremum local en \( (a,b) \), alors :</p>
+        <div class="formula">\[ \vec{\nabla} f(a,b) = \vec{0} \iff \frac{\partial f}{\partial x}(a,b) = 0 \text{ et } \frac{\partial f}{\partial y}(a,b) = 0 \]</div>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Matrice Hessienne et critère du second ordre</h3>
+        <p>La matrice hessienne de \( f \) en \( (a,b) \) est :</p>
+        <div class="formula">\[ H_f(a,b) = \begin{pmatrix} f_{xx} & f_{xy} \\ f_{xy} & f_{yy} \end{pmatrix} \]</div>
+        <p>On pose \( \Delta = \det H_f = f_{xx}f_{yy} - f_{xy}^2 \). Alors en un point critique :</p>
+        <table>
+            <thead><tr><th>Condition</th><th>Nature</th></tr></thead>
+            <tbody>
+                <tr><td>\( \Delta > 0 \) et \( f_{xx} > 0 \)</td><td>✅ Minimum local</td></tr>
+                <tr><td>\( \Delta > 0 \) et \( f_{xx} < 0 \)</td><td>✅ Maximum local</td></tr>
+                <tr><td>\( \Delta < 0 \)</td><td>✅ Point-selle (ni max ni min)</td></tr>
+                <tr><td>\( \Delta = 0 \)</td><td>❓ Cas indéterminé — étude directe</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card card-tip">
+        <h3>Exemple classique : Point de Selle</h3>
+        <p>La fonction \( g(x,y) = x^2 - y^2 \) admet un point critique en \( (0,0)\) avec \(\Delta = -4 < 0\). Cependant :</p>
+        <ul>
+            <li>Sur l'axe des \( x \) (\( y=0 \)) : \( g(x,0) = x^2 \geq 0 \) → semble un minimum.</li>
+            <li>Sur l'axe des \( y \) (\( x=0 \)) : \( g(0,y) = -y^2 \leq 0 \) → semble un maximum.</li>
+        </ul>
+        <p>Comme \(g\) change de signe dans tout voisinage de l'origine, il n'y a pas d'extremum : c'est un <strong>point de selle</strong> (ou "col").</p>
+    </div>
+
+    <div class="card card-warn">
+        <h3>⚠️ Conditions nécessaires vs suffisantes</h3>
+        <p>Le critère de la Hessienne (\(\Delta > 0\)) est une <strong>condition suffisante</strong>. Les conditions <strong>nécessaires</strong> pour un minimum local sont plus faibles :</p>
+        <ul>
+            <li>Si \(f\) admet un minimum local en \((a,b)\), alors nécessairement \(\Delta \geq 0\) et \(f_{xx} \geq 0\).</li>
+            <li>Si \(f\) admet un maximum local en \((a,b)\), alors nécessairement \(\Delta \geq 0\) et \(f_{xx} \leq 0\).</li>
+        </ul>
+        <p>Ces conditions nécessaires ne permettent pas de conclure seules (le cas \(\Delta = 0\) reste ambigu).</p>
+    </div>
+
+    <div class="card card-warn">
+        <h3>⚠️ Cas critique \( \Delta = 0 \)</h3>
+        <p>Quand \( \det H_f = 0 \), le critère du second ordre est <strong>inapplicable</strong>. On doit étudier directement le signe de :</p>
+        <div class="formula">\[ f(a+h,\, b+k) - f(a,b) \]</div>
+        <ul>
+            <li>Toujours \( \geq 0 \) → minimum local.</li>
+            <li>Toujours \( \leq 0 \) → maximum local.</li>
+            <li>Change de signe (ex: \( h^2 - k^4 \)) → point-selle.</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Théorème de Weierstrass</h3>
+        <p>Toute fonction <strong>continue</strong> sur un ensemble <strong>compact</strong> (fermé et borné) est bornée et <em>atteint</em> ses bornes.</p>
+        <p>→ Elle admet un maximum global et un minimum global sur ce compact.</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Méthode complète : extrema sur un domaine fermé</h3>
+        <ol class="steps">
+            <li>Trouver tous les <strong>points critiques intérieurs</strong> (résoudre \( \nabla f = 0 \)).</li>
+            <li>Étudier \( f \) sur la <strong>frontière</strong> en la paramétrant (ramener à une fonction d'une variable).</li>
+            <li><strong>Comparer</strong> toutes les valeurs obtenues pour identifier le max et le min globaux.</li>
+        </ol>
+    </div>
+
+    <div class="card card-method">
+        <h3>Multiplicateurs de Lagrange</h3>
+        <p>Pour optimiser \( f(x,y) \) sous contrainte \( g(x,y) = 0 \), les extrema vérifient :</p>
+        <div class="formula">\[ \vec{\nabla} f = \lambda\, \vec{\nabla} g \quad \text{et} \quad g(x,y) = 0 \]</div>
+        <p>Soit le système : \( f_x = \lambda g_x,\; f_y = \lambda g_y,\; g = 0 \). On résout en éliminant \( \lambda \).</p>
+        <p><strong>Exemple :</strong> Maximiser \(f(x,y) = xy\) sous \(g(x,y) = x+y-1 = 0\).</p>
+        <p>Système : \(y = \lambda\), \(x = \lambda\), \(x+y=1\) → \(x = y = \frac{1}{2}\), donc \(\max = \frac{1}{4}\).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Forme quadratique de la Hessienne</h3>
+        <p>Le terme d'ordre 2 du développement de Taylor-Young est la <strong>forme quadratique</strong> associée à la Hessienne :</p>
+        <div class="formula">\[ Q(h,k) = \frac{1}{2}\left(f_{xx}h^2 + 2f_{xy}hk + f_{yy}k^2\right) \]</div>
+        <p>Le signe de \(Q\) (pour \((h,k) \neq (0,0)\)) détermine la nature du point critique :</p>
+        <ul>
+            <li>\(Q > 0\) pour tout \((h,k) \neq 0\) : \(H_f\) est <strong>définie positive</strong> → minimum local.</li>
+            <li>\(Q < 0\) pour tout \((h,k) \neq 0\) : \(H_f\) est <strong>définie négative</strong> → maximum local.</li>
+            <li>\(Q\) change de signe : \(H_f\) est <strong>indéfinie</strong> → point-selle.</li>
+        </ul>
+        <p><em>C'est pourquoi le critère \(\Delta = \det H_f\) fonctionne : \(\Delta > 0\) ↔ définie (signe = celui de \(f_{xx}\)) ; \(\Delta < 0\) ↔ indéfinie.</em></p>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CHAPITRE 5 — Matrices
+══════════════════════════════════════════════════════ -->
+<section id="chap5" class="chapter">
+    <div class="chapter-header">
+        <div class="chap-label">Chapitre 5</div>
+        <h2>Algèbre Matricielle</h2>
+        <p>Opérations, déterminants, inversibilité et diagonalisation.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Matrice Identité \(I_n\)</h3>
+        <p>La matrice carrée possédant des <strong>1 sur la diagonale</strong> et des <strong>0 partout ailleurs</strong> est l'élément neutre du produit matriciel :</p>
+        <div class="formula">\[ \forall A \in \mathcal{M}_n(\mathbb{R}), \; A \times I_n = I_n \times A = A \]</div>
+        <p>Elle joue le rôle du « 1 » pour la multiplication des matrices.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Propriétés de l'Addition et du Scalaire</h3>
+        <p>Soient \( A, B, C \in \mathcal{M}_{m,n}(\mathbb{R}) \) et \( \lambda, \mu \in \mathbb{R} \) :</p>
+        <ul>
+            <li><strong>Commutativité :</strong> \( A + B = B + A \)</li>
+            <li><strong>Associativité :</strong> \( (A+B)+C = A+(B+C) \)</li>
+            <li><strong>Élément neutre :</strong> La matrice nulle \( 0_{m,n} \) vérifie \( A + 0 = A \).</li>
+            <li><strong>Opposé :</strong> \( A + (-A) = 0 \) où \( (-A) = (-1) \cdot A \).</li>
+            <li><strong>Distributivité :</strong> \( \lambda(A+B) = \lambda A + \lambda B \) et \( (\lambda+\mu)A = \lambda A + \mu A \).</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Opérations et propriétés</h3>
+        <ul>
+            <li><strong>Transposée \( A^T \) :</strong> On échange lignes et colonnes. \( (AB)^T = B^T A^T \).</li>
+            <li><strong>Non-commutativité :</strong> En général \( AB \neq BA \).</li>
+            <li><strong>Matrice symétrique :</strong> \( A = A^T \) (ses valeurs propres sont réelles).</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Règles de calcul : Transposée et Inverse</h3>
+        <div class="grid-2">
+            <div>
+                <p><strong>Propriétés de la Transposée :</strong></p>
+                <ul>
+                    <li>\( (A+B)^T = A^T + B^T \)</li>
+                    <li>\( (\lambda A)^T = \lambda A^T \)</li>
+                    <li>\( (A^T)^T = A \)</li>
+                    <li>\( (AB)^T = B^T A^T \)</li>
+                </ul>
+            </div>
+            <div>
+                <p><strong>Propriétés de l'Inverse :</strong></p>
+                <ul>
+                    <li>\( (A^{-1})^{-1} = A \)</li>
+                    <li>\( (\lambda A)^{-1} = \dfrac{1}{\lambda} A^{-1} \) (\(\lambda \neq 0\))</li>
+                    <li>\( (A^T)^{-1} = (A^{-1})^T \)</li>
+                    <li>\( (AB)^{-1} = B^{-1}A^{-1} \)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-def">
+        <h3>Déterminant</h3>
+        <ul>
+            <li><strong>Sarrus :</strong> uniquement pour les matrices \( 3\times 3 \).</li>
+            <li><strong>Laplace :</strong> \( \det A = \sum_j (-1)^{i+j} a_{ij} \Delta_{ij} \) (développement selon la ligne \( i \)).</li>
+        </ul>
+        <div class="formula">\[ \det(AB) = \det(A)\cdot\det(B), \qquad \det(A^T) = \det(A) \]</div>
+    </div>
+
+    <div class="card card-method">
+        <h3>Inversibilité et calcul de l'inverse</h3>
+        <p>\( A \) est inversible \( \iff \det(A) \neq 0 \).</p>
+        <div class="grid-2" style="margin-top:0.8rem; margin-bottom:0;">
+            <div>
+                <p><strong>Gauss-Jordan :</strong></p>
+                <p>Transformer \( (A\,|\,I) \to (I\,|\,A^{-1}) \) par opérations élémentaires sur les lignes.</p>
+            </div>
+            <div>
+                <p><strong>Comatrice :</strong></p>
+                <div class="formula" style="margin-top:0">\[ A^{-1} = \frac{1}{\det A}\,\mathrm{Com}(A)^T \]</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-def">
+        <h3>Rang d'une matrice</h3>
+        <p>Le <strong>rang</strong> de \( A \) est la dimension de l'espace engendré par ses colonnes (ou lignes).</p>
+        <ul>
+            <li>Se calcule en échelonnant \( A \) et en comptant les pivots.</li>
+            <li>\( \mathrm{rg}(A) = n \iff A \) inversible (pour une matrice \( n\times n \)).</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Valeurs propres et Diagonalisation</h3>
+        <ol class="steps">
+            <li>Calculer le <strong>polynôme caractéristique</strong> : \( P_A(\lambda) = \det(A - \lambda I) \).</li>
+            <li>Trouver les <strong>valeurs propres</strong> (racines de \( P_A \)).</li>
+            <li>Pour chaque \( \lambda_i \), résoudre \( (A - \lambda_i I)X = 0 \) → <strong>vecteurs propres</strong>.</li>
+            <li>Si \( n \) vecteurs propres linéairement indépendants, alors \( A = PDP^{-1} \) avec \( D \) diagonale.</li>
+        </ol>
+        <div class="formula">\[ \text{Tr}(A) = \sum \lambda_i, \qquad \det(A) = \prod \lambda_i \]</div>
+    </div>
+
+    <div class="card card-warn">
+        <h3>⚠️ Condition de diagonalisabilité</h3>
+        <p>Une matrice \( n\times n \) est diagonalisable si et seulement si la <strong>multiplicité géométrique</strong> (dimension du sous-espace propre) égale la <strong>multiplicité algébrique</strong> (multiplicité en tant que racine de \( P_A \)) pour chaque valeur propre.</p>
+        <p><strong>Cas favorable :</strong> Si \( P_A \) a \( n \) racines distinctes, \( A \) est automatiquement diagonalisable.</p>
+    </div>
+
+    <div class="card method">
+        <h3>Puissances et Binôme de Newton</h3>
+        <p>Si deux matrices \(A\) et \(B\) <strong>commutent</strong> (\(AB = BA\)), alors :</p>
+        <div class="math-block">
+            \[ (A+B)^n = \sum_{k=0}^n \binom{n}{k} A^k B^{n-k} \]
+        </div>
+        <p><strong>Polynôme de matrice :</strong> Pour \(P(X) = a_n X^n + \dots + a_0\), on a \(P(A) = a_n A^n + \dots + a_0 I_n\). Si \(P(A) = 0\), \(P\) est un polynôme annulateur.</p>
+    </div>
+
+    <div class="card card-def">
+    <h3>Matrices triangulaires et Nilpotentes</h3>
+    <ul>
+        <li><strong>Triangulaire supérieure :</strong> \(a_{i,j}=0\) pour \(i > j\).</li>
+        <li><strong>Triangulaire inférieure :</strong> \(a_{i,j}=0\) pour \(i < j\)[cite: 3472].</li>
+        <li><strong>Matrice Nilpotente :</strong> \(A\) est nilpotente d'ordre \(k\) si \(A^{k-1} \neq 0\) et \(A^k = 0\)[cite: 3521, 3523].</li>
+    </ul>
+</div>
+
+    <div class="card card-thm">
+        <h3>Propriétés des matrices diagonales</h3>
+        <p>Soit \(D = Diag(d_1, \dots, d_n)\)[cite: 3581]:</p>
+        <ul>
+            <li>\(D\) est inversible ssi tous les \(d_i \neq 0\). Alors \(D^{-1} = Diag(d_1^{-1}, \dots, d_n^{-1})\)[cite: 3584].</li>
+            <li>Pour tout \(k \in \mathbb{N}\), \(D^k = Diag(d_1^k, \dots, d_n^k)\)[cite: 3585].</li>
+            <li><strong>Formule de passage :</strong> Si \(A = PDP^{-1}\), alors \(A^k = PD^kP^{-1}\)[cite: 3586, 3588].</li>
+        </ul>
+    </div>
+
+
+    <div class="card error-box">
+        <h3>Mises en garde : Non-simplification</h3>
+        <ul>
+            <li>En général, \(A \times B = A \times C \not\implies B = C\) (vrai seulement si \(A\) est inversible)[cite: 1101, 1144].</li>
+            <li>Si \(A \times B = 0\), on ne peut pas en déduire que \(A = 0\) ou \(B = 0\)[cite: 1100].</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Identité géométrique</h3>
+        <p>Pour tout \(p \in \mathbb{N}\), on a[cite: 1174, 1175]:</p>
+        <div class="formula">
+            \[ A^{p+1} - I_n = (A - I_n) \times \sum_{k=0}^{p} A^k \]
+        </div>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Transposée : Propriétés avancées</h3>
+        <ul>
+            <li><strong>Trace :</strong> \(\mathrm{Tr}(A^T) = \mathrm{Tr}(A)\) (transposer ne change pas les éléments diagonaux).</li>
+            <li><strong>Inverse :</strong> Si \(A\) est inversible, alors \(A^T\) l'est aussi et \((A^T)^{-1} = (A^{-1})^T\).</li>
+            <li><strong>Déterminant :</strong> \(\det(A^T) = \det(A)\) (déjà dans la définition du déterminant).</li>
+        </ul>
+    </div>
+
+    <div class="card card-method">
+        <h3>Calcul de \(A^n\) par Division Euclidienne</h3>
+        <p>Méthode applicable lorsque \(A\) admet un polynôme annulateur connu (ex : via le polynôme caractéristique) :</p>
+        <ol class="steps">
+            <li>Trouver un polynôme \(P(X)\) tel que \(P(A) = 0\) (polynôme annulateur).</li>
+            <li>Effectuer la division euclidienne de \(X^n\) par \(P(X)\) : \(X^n = P(X) \cdot Q(X) + R(X)\).</li>
+            <li>En déduire \(A^n = R(A)\) (car \(P(A) \cdot Q(A) = 0\)).</li>
+        </ol>
+        <p><strong>Exemple :</strong> Si \(A^2 - 3A + 2I = 0\), pour calculer \(A^{10}\), on divise \(X^{10}\) par \(X^2 - 3X + 2\) et on remplace \(X\) par \(A\) dans le reste.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Définition du Rang</h3>
+        <p>Le <strong>rang</strong> d'une matrice \(A\) est la dimension de l'espace engendré par ses colonnes.</p>
+        <p><strong>Propriété :</strong> Une matrice carrée \(A\) est inversible si et seulement si son rang est égal à son ordre \(n\).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Systèmes linéaires : méthodes de résolution</h3>
+        <p>Pour résoudre \(AX = B\) (système de \(n\) équations à \(n\) inconnues) :</p>
+        <div class="grid-2" style="margin-top:0.6rem; margin-bottom:0">
+            <div>
+                <p><strong>Élimination de Gauss :</strong></p>
+                <p>Échelonner la matrice augmentée \((A|B)\) par opérations élémentaires sur les lignes. On remonte ensuite (pivot arrière) pour lire les solutions.</p>
+            </div>
+            <div>
+                <p><strong>Règle de Cramer</strong> (si \(\det A \neq 0\)) :</p>
+                <div class="formula" style="margin-top:0">\[ x_i = \frac{\det A_i}{\det A} \]</div>
+                <p>où \(A_i\) est la matrice \(A\) dont la \(i\)-ème colonne est remplacée par \(B\).</p>
+            </div>
+        </div>
+        <p style="margin-top:0.8rem"><strong>Compatibilité (Rouché-Fontené) :</strong> Le système admet des solutions ssi \(\mathrm{rg}(A) = \mathrm{rg}(A|B)\).</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Trace : définition et propriétés</h3>
+        <p><strong>Définition :</strong> La <strong>trace</strong> d'une matrice carrée \(A = (a_{ij}) \in \mathcal{M}_n(\mathbb{R})\) est la somme de ses coefficients diagonaux :</p>
+        <div class="formula">\[ \mathrm{Tr}(A) = \sum_{i=1}^n a_{ii} = a_{11} + a_{22} + \cdots + a_{nn} \]</div>
+        <p><em>C'est la définition première — indépendante des valeurs propres.</em></p>
+        <ul>
+            <li><strong>Linéarité :</strong> \(\mathrm{Tr}(A+B) = \mathrm{Tr}(A) + \mathrm{Tr}(B)\) et \(\mathrm{Tr}(\lambda A) = \lambda\,\mathrm{Tr}(A)\).</li>
+            <li><strong>Commutativité cyclique :</strong> \(\mathrm{Tr}(AB) = \mathrm{Tr}(BA)\) (même si \(AB \neq BA\)).</li>
+            <li><strong>Invariance par similarité :</strong> \(\mathrm{Tr}(P^{-1}AP) = \mathrm{Tr}(A)\).</li>
+            <li><strong>Lien valeurs propres :</strong> \(\mathrm{Tr}(A) = \sum_i \lambda_i\) — conséquence de l'invariance, pas la définition.</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Propriétés avancées (Trace &amp; Det)</h3>
+        <ul>
+            <li><strong>Linéarité de la Trace :</strong> \(\mathrm{Tr}(A+B) = \mathrm{Tr}(A) + \mathrm{Tr}(B)\) et \(\mathrm{Tr}(k \cdot A) = k \cdot \mathrm{Tr}(A)\).</li>
+            <li><strong>Trace d'un produit :</strong> \(\mathrm{Tr}(AB) = \mathrm{Tr}(BA)\) — attention, différent de \(\mathrm{Tr}(A)\mathrm{Tr}(B)\) !</li>
+            <li><strong>Déterminant et scalaire :</strong> \(\det(k \cdot A) = k^n \det(A)\) où \(n\) est l'ordre de la matrice.</li>
+            <li><strong>Déterminant de l'inverse :</strong> \(\det(A^{-1}) = \dfrac{1}{\det(A)}\).</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Inverse d'un produit</h3>
+        <p>Si \(A\) et \(B\) sont deux matrices <strong>inversibles</strong> de même ordre, alors \(AB\) est inversible et :</p>
+        <div class="formula">\[ (AB)^{-1} = B^{-1}A^{-1} \]</div>
+        <p><strong>Attention à l'ordre !</strong> L'inversion renverse l'ordre du produit (analogue à \((fg)^{-1} = g^{-1}f^{-1}\) pour des bijections).</p>
+        <p><strong>Généralisation :</strong> \((A_1 A_2 \cdots A_k)^{-1} = A_k^{-1} \cdots A_2^{-1} A_1^{-1}\).</p>
+        <p><strong>Autres règles utiles :</strong> \((A^T)^{-1} = (A^{-1})^T\) et \((A^k)^{-1} = (A^{-1})^k\).</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Matrices orthogonales</h3>
+        <p>Une matrice \(A \in \mathcal{M}_n(\mathbb{R})\) est dite <strong>orthogonale</strong> si :</p>
+        <div class="formula">\[ A^T A = A A^T = I_n \iff A^T = A^{-1} \]</div>
+        <ul>
+            <li>\(\det(A) = \pm 1\).</li>
+            <li>Les colonnes (et lignes) de \(A\) forment une base orthonormée de \(\mathbb{R}^n\).</li>
+            <li>Cas \(n=2\) : rotations (\(\det=+1\)) et symétries (\(\det=-1\)).</li>
+        </ul>
+        <div class="formula">\[ A = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix} \quad \text{(rotation d'angle } \theta\text{)} \]</div>
+    </div>
+
+    <div class="card card-def">
+        <h3>Sous-espace propre</h3>
+        <p>Pour une valeur propre \(\lambda_i\), le <strong>sous-espace propre</strong> associé est :</p>
+        <div class="formula">\[ E_{\lambda_i} = \ker(A - \lambda_i I) = \{X \in \mathbb{R}^n \mid AX = \lambda_i X\} \]</div>
+        <ul>
+            <li><strong>Multiplicité géométrique</strong> \(g_i = \dim E_{\lambda_i}\).</li>
+            <li><strong>Multiplicité algébrique</strong> \(a_i\) = multiplicité de \(\lambda_i\) comme racine de \(P_A\).</li>
+            <li>Toujours : \(1 \leq g_i \leq a_i\).</li>
+            <li>\(A\) est diagonalisable \(\iff g_i = a_i\) pour toute valeur propre.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CHAPITRE 6 — Polynômes
+══════════════════════════════════════════════════════ -->
+<section id="chap6" class="chapter">
+    <div class="chapter-header">
+        <div class="chap-label">Chapitre 6</div>
+        <h2>Polynômes à coefficients réels</h2>
+        <p>Division euclidienne, PGCD, racines et irréductibilité dans \( \mathbb{R}[X] \).</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Division euclidienne</h3>
+        <p>Pour tout \( A, B \in \mathbb{R}[X] \) avec \( B \neq 0 \), il existe des uniques \( Q, R \) tels que :</p>
+        <div class="formula">\[ A = BQ + R \qquad \text{avec } \deg R < \deg B \]</div>
+        <p><strong>Conséquence :</strong> \( a \) est racine de \( P \iff (X-a) \mid P(X) \).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Propriétés du reste et racines distinctes</h3>
+        <ul>
+            <li><strong>Reste par \((X-a)\) :</strong> Le reste de la division euclidienne de \(P\) par \((X-a)\) est le réel \(P(a)\). (En particulier, \(a\) est racine \(\iff\) le reste est 0.)</li>
+            <li><strong>Racines distinctes :</strong> Si \(\alpha_1, \dots, \alpha_k\) sont des racines <em>distinctes</em> de \(P\), alors le produit \((X-\alpha_1)\cdots(X-\alpha_k)\) divise \(P\).</li>
+            <li><strong>Nombre de racines :</strong> Un polynôme non nul de degré \(n\) admet <strong>au plus \(n\) racines</strong> (comptées sans multiplicité).</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>PGCD et algorithme d'Euclide</h3>
+        <p>Le PGCD de \( A \) et \( B \) s'obtient par divisions euclidiennes successives.</p>
+        <div class="formula">\[ A = BQ_1 + R_1,\quad B = R_1 Q_2 + R_2,\quad \ldots \]</div>
+        <p>Le dernier reste non nul est le PGCD (à une constante multiplicative près).</p>
+        <p><strong>Unicité :</strong> Le PGCD est unique si on impose qu'il soit <strong>unitaire</strong> (coefficient dominant égal à 1).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Théorème de Bézout</h3>
+        <p>\( A \) et \( B \) sont <strong>premiers entre eux</strong> (\( \gcd = 1 \)) si et seulement si :</p>
+        <div class="formula">\[ \exists\, U, V \in \mathbb{R}[X] \quad \text{tels que} \quad AU + BV = 1 \]</div>
+        <p><strong>Application :</strong> Si \( A \mid BC \) et \( \gcd(A,B)=1 \), alors \( A \mid C \).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Racines rationnelles (coefficients entiers)</h3>
+        <p>Si \( P(X) = a_n X^n + \cdots + a_0 \in \mathbb{Z}[X] \) admet \( \dfrac{p}{q} \) (irréductible) comme racine :</p>
+        <ul>
+            <li>\( p \mid a_0 \) (divise le terme constant)</li>
+            <li>\( q \mid a_n \) (divise le coefficient dominant)</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Multiplicité d'une racine</h3>
+        <p><strong>Définition algébrique :</strong> \( \alpha \) est racine de multiplicité \( m \) de \( P \) si et seulement si :</p>
+        <div class="formula">\[ (X-\alpha)^m \mid P \quad \text{et} \quad (X-\alpha)^{m+1} \nmid P \]</div>
+        <p><strong>Caractérisation par les dérivées :</strong> Cela équivaut à :</p>
+        <div class="formula">\[ P(\alpha) = P'(\alpha) = \cdots = P^{(m-1)}(\alpha) = 0, \quad P^{(m)}(\alpha) \neq 0 \]</div>
+    </div>
+
+    <div class="card card-method">
+        <h3>Reste de la division par \((X-a)^2\)</h3>
+        <p>Le reste \(R\) de la division euclidienne de \(P\) par \((X-a)^2\) est un polynôme de degré \(\leq 1\), donné par la formule :</p>
+        <div class="formula">\[ R(X) = P'(a)\,(X-a) + P(a) \]</div>
+        <p><em>Preuve :</em> On écrit \(P(X) = (X-a)^2 Q(X) + \alpha(X-a) + \beta\). En évaluant en \(X=a\) : \(\beta = P(a)\). En dérivant et évaluant en \(X=a\) : \(\alpha = P'(a)\).</p>
+        <p><strong>Corollaire :</strong> \(a\) est racine double de \(P\) \(\iff P(a) = 0\) et \(P'(a) = 0\) \(\iff (X-a)^2 \mid P\).</p>
+        <p><strong>Généralisation :</strong> Le reste de la division par \((X-a)^k\) est \(\displaystyle\sum_{j=0}^{k-1} \frac{P^{(j)}(a)}{j!}(X-a)^j\) (début du développement de Taylor).</p>
+    </div>
+
+    <div class="card definition">
+        <h3>Dérivées successives et Leibniz</h3>
+        <p>La dérivée \(n\)-ième d'un produit de deux polynômes \(P\) et \(Q\) est donnée par :</p>
+        <div class="math-block">
+            \[ (P \cdot Q)^{(n)} = \sum_{k=0}^n \binom{n}{k} P^{(k)} Q^{(n-k)} \]
+        </div>
+        <p>Utile pour trouver l'ordre de multiplicité d'une racine : \(\alpha\) est racine d'ordre \(k\) ssi \(P(\alpha) = P'(\alpha) = \dots = P^{(k-1)}(\alpha) = 0\) et \(P^{(k)}(\alpha) \neq 0\).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Propriétés du degré et Intégrité</h3>
+        <ul>
+            <li>\(deg(P+Q) \le max(deg(P), deg(Q))\)[cite: 3730, 3731].</li>
+            <li>\(deg(P \times Q) = deg(P) + deg(Q)\)[cite: 3783, 3785].</li>
+            <li><strong>Propriété d'intégrité :</strong> \(P \times Q = 0 \iff P = 0 \text{ ou } Q = 0\)[cite: 3795, 3796].</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Définition de la Dérivée et Degré Spécial</h3>
+        <ul>
+            <li><strong>Dérivée formelle :</strong> Si \(P = \displaystyle\sum_{k=0}^n a_k X^k\), alors \(P' = \displaystyle\sum_{k=1}^n k\, a_k X^{k-1}\).</li>
+            <li><strong>Le Polynôme Nul :</strong> Par convention, \(\deg(0) = -\infty\). Cela permet de conserver la formule \(\deg(P \times Q) = \deg(P) + \deg(Q)\) cohérente même quand l'un des facteurs est nul (car \(-\infty + n = -\infty\)).</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Vocabulaire Formel</h3>
+        <p>Soit \(P = a_n X^n + \dots + a_0\) de degré \(n\)[cite: 1334, 1335]:</p>
+        <ul>
+            <li><strong>Coefficient dominant :</strong> \(a_n\)[cite: 1337].</li>
+            <li><strong>Terme dominant :</strong> \(a_n X^n\)[cite: 1337].</li>
+            <li><strong>Polynôme constant :</strong> degré inférieur ou égal à 0 (\(P = a_0\))[cite: 1338].</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Polynôme Unitaire (monique)</h3>
+        <p>Un polynôme est dit <strong>unitaire</strong> (ou monique) si son coefficient dominant \(a_n\) est égal à <strong>1</strong>.</p>
+        <p><strong>Exemple :</strong> \(X^3 - 2X + 5\) est unitaire. \(2X^3 - 2X + 5\) ne l'est pas.</p>
+        <p><em>Intérêt :</em> Normaliser le PGCD en le choisissant unitaire le rend unique.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Formule de Taylor pour les polynômes</h3>
+        <p>Pour tout polynôme \(P\) de degré \(n\) et tout réel \(a\), on peut réécrire \(P\) selon les puissances de \((X-a)\) :</p>
+        <div class="formula">\[ P(X) = \sum_{k=0}^{n} \frac{P^{(k)}(a)}{k!} (X-a)^k \]</div>
+        <p>où \(P^{(k)}\) est la dérivée \(k\)-ième de \(P\). Cette formule est exacte (sans terme d'erreur) pour les polynômes, contrairement au développement de Taylor en analyse.</p>
+        <p><strong>Cas particulier :</strong> \(P(X) = P(a) + P'(a)(X-a) + \dfrac{P''(a)}{2}(X-a)^2 + \cdots\)</p>
+    </div>
+
+    <div class="card card-warn">
+        <h3>⚠️ Distinction : Polynôme \(P\) vs Fonction polynomiale \(\tilde{P}\)</h3>
+        <p>Un <strong>polynôme</strong> \(P = (a_0, a_1, \ldots, a_n, 0, 0, \ldots) \in \mathbb{R}[X]\) est une <em>suite presque nulle de coefficients réels</em> — c'est un objet purement formel/algébrique.</p>
+        <p>La <strong>fonction polynomiale</strong> associée \(\tilde{P} : \mathbb{R} \to \mathbb{R}\), \(x \mapsto \sum_{k=0}^n a_k x^k\) est l'application qui évalue \(P\) en un réel.</p>
+        <p><strong>Subtilité :</strong> Deux polynômes distincts \(P \neq Q\) définissent toujours des fonctions distinctes \(\tilde{P} \neq \tilde{Q}\) sur \(\mathbb{R}\) (car \(\mathbb{R}\) est infini). Mais ce n'est <em>pas</em> vrai sur un corps fini (ex. sur \(\mathbb{Z}/2\mathbb{Z}\), \(X^2\) et \(X\) donnent la même fonction).</p>
+        <p>En pratique en S2 : on identifie \(P\) et \(\tilde{P}\), mais il faut savoir que ce sont deux notions distinctes.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Valeur de \(P^{(n)}\) — dérivée \(n\)-ième du terme dominant</h3>
+        <p>Pour \(P = a_n X^n + a_{n-1}X^{n-1} + \cdots + a_0\) de degré \(n\), la dérivée \(n\)-ième est un polynôme <strong>constant</strong> :</p>
+        <div class="formula">\[ P^{(n)}(x) = n!\, a_n \quad \text{(constante, indépendante de } x\text{)} \]</div>
+        <p><strong>Utilité pour les multiplicités :</strong> Si \(\alpha\) est racine de multiplicité \(m\), alors \(P^{(m)}(\alpha) = m!\, c\) où \(c\) est le coefficient de \((X-\alpha)^m\) dans la factorisation. En particulier \(P^{(m)}(\alpha) \neq 0\).</p>
+        <p><strong>Corollaire pratique :</strong> \(P^{(k)} = 0\) pour tout \(k > n\), et \(P^{(n)} = n!\,a_n\) est la façon la plus rapide de lire le coefficient dominant.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Propriétés du Degré</h3>
+        <ul>
+            <li>\(deg(P \times Q) = deg(P) + deg(Q)\)[cite: 1426].</li>
+            <li>\(B\) divise \(A\) si et seulement si le reste de la division euclidienne de \(A\) par \(B\) est nul[cite: 1614].</li>
+        </ul>
+    </div>
+
+    <div class="card card-method">
+        <h3>DES avec facteur irréductible du 2nd degré</h3>
+        <p>Si \(Q(X)\) contient un facteur irréductible \((X^2 + pX + q)^k\) (discriminant \(< 0\)), la décomposition comporte des termes de la forme :</p>
+        <div class="formula">\[ \frac{a_j X + b_j}{(X^2+pX+q)^j}, \quad j = 1, \ldots, k \]</div>
+        <p><strong>Exemple :</strong> Décomposer \(\dfrac{X^2+1}{(X-1)(X^2+1)}\) dans \(\mathbb{R}(X)\) :</p>
+        <div class="formula">\[ \frac{X^2+1}{(X-1)(X^2+1)} = \frac{A}{X-1} + \frac{BX+C}{X^2+1} \]</div>
+        <ul>
+            <li>Multiplier par \((X-1)\) et évaluer en \(X=1\) : \(A = 1\).</li>
+            <li>Identifier les coefficients (ou évaluer en d'autres points) pour trouver \(B\) et \(C\).</li>
+        </ul>
+        <p><strong>Remarque :</strong> On ne peut <em>pas</em> simplifier \(\dfrac{BX+C}{X^2+pX+q}\) en \(\dfrac{B}{X+p} + \dfrac{C}{q}\) car \(X^2+pX+q\) est irréductible dans \(\mathbb{R}\).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Lemme de Gauss</h3>
+        <p>Un polynôme \(P \in \mathbb{Z}[X]\) est dit <strong>primitif</strong> si le PGCD de ses coefficients est 1.</p>
+        <p><strong>Lemme de Gauss :</strong> Le produit de deux polynômes primitifs est un polynôme primitif.</p>
+        <p><strong>Corollaire :</strong> Si \(P \in \mathbb{Z}[X]\) est irréductible dans \(\mathbb{Z}[X]\), il est irréductible dans \(\mathbb{Q}[X]\). En particulier, si \(P\) n'admet pas de racine rationnelle et est de degré 2 ou 3, alors \(P\) est irréductible dans \(\mathbb{Q}[X]\).</p>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CHAPITRE 7 — Nombres complexes
+══════════════════════════════════════════════════════ -->
+<section id="chap7" class="chapter">
+    <div class="chapter-header">
+        <div class="chap-label">Chapitre 7</div>
+        <h2>Nombres complexes</h2>
+        <p>Forme algébrique, trigonométrique, exponentielle et applications.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Représentations d'un nombre complexe</h3>
+        <table>
+            <thead><tr><th>Forme</th><th>Expression</th><th>Usage</th></tr></thead>
+            <tbody>
+                <tr><td>Algébrique</td><td>\( z = a + ib \)</td><td>Sommes, différences</td></tr>
+                <tr><td>Trigonométrique</td><td>\( z = r(\cos\theta + i\sin\theta) \)</td><td>Interprétation géométrique</td></tr>
+                <tr><td>Exponentielle</td><td>\( z = r\,e^{i\theta} \)</td><td>Produits, puissances</td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top:0.8rem">avec \( r = |z| = \sqrt{a^2+b^2} \) et \( \theta = \arg(z) \in ]-\pi, \pi] \).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Calculs sous forme exponentielle</h3>
+        <p>Soient \( z = r e^{i\theta} \) et \( z' = r' e^{i\theta'} \). La forme exponentielle est l'outil le plus puissant pour les opérations :</p>
+        <ul>
+            <li><strong>Produit :</strong> \( z z' = rr'\, e^{i(\theta + \theta')} \)</li>
+            <li><strong>Quotient :</strong> \( \dfrac{z}{z'} = \dfrac{r}{r'}\, e^{i(\theta - \theta')} \)</li>
+            <li><strong>Inverse :</strong> \( \dfrac{1}{z} = \dfrac{1}{r}\, e^{-i\theta} \)</li>
+            <li><strong>Puissance :</strong> \( z^n = r^n e^{in\theta} \) (formule de Moivre)</li>
+        </ul>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Formule d'Euler et de Moivre</h3>
+        <div class="formula">\[ e^{i\theta} = \cos\theta + i\sin\theta \]</div>
+        <div class="formula">\[ (\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta) \]</div>
+        <p><strong>Applications :</strong> Linéarisation de \( \cos^n\theta \) et \( \sin^n\theta \) ; calcul de \( \cos(n\theta) \) et \( \sin(n\theta) \).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Calcul de \(\cos(n\theta)\) et \(\sin(n\theta)\) via Moivre + Newton</h3>
+        <p>Contrairement à la linéarisation (qui exprime \(\cos^n\theta\) en somme de \(\cos(k\theta)\)), ici on cherche à exprimer \(\cos(n\theta)\) en fonction de puissances de \(\cos\theta\) et \(\sin\theta\) :</p>
+        <ol class="steps">
+            <li>Écrire \(\cos(n\theta) + i\sin(n\theta) = (\cos\theta + i\sin\theta)^n\) (formule de Moivre).</li>
+            <li>Développer le terme de droite avec le <strong>Binôme de Newton</strong> : \(\displaystyle\sum_{k=0}^{n}\binom{n}{k}(\cos\theta)^{n-k}(i\sin\theta)^k\).</li>
+            <li>Séparer les termes selon la parité de \(k\) (les \(k\) pairs donnent des réels, les impairs donnent des imaginaires purs).</li>
+            <li>Identifier les parties réelle et imaginaire pour obtenir \(\cos(n\theta)\) et \(\sin(n\theta)\).</li>
+        </ol>
+        <p><strong>Exemple :</strong> \(\cos(3\theta) = \cos^3\theta - 3\cos\theta\sin^2\theta = 4\cos^3\theta - 3\cos\theta\).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Puissances de \( i \)</h3>
+        <div class="formula">\[ i^0=1,\quad i^1=i,\quad i^2=-1,\quad i^3=-i,\quad i^4=1,\;\ldots \]</div>
+        <p><strong>Règle :</strong> \( i^n = i^{n \bmod 4} \). Exemple : \( i^{42} = i^{42 \bmod 4} = i^2 = -1 \).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Racines carrées de \( A + iB \)</h3>
+        <p>On pose \( z = x+iy \) et on résout \( z^2 = A+iB \) via le système :</p>
+        <div class="formula">\[ \begin{cases} x^2 - y^2 = A \\ 2xy = B \\ x^2 + y^2 = \sqrt{A^2+B^2} \end{cases} \]</div>
+        <p>Des équations 1 et 3 : \( x^2 = \dfrac{A + \sqrt{A^2+B^2}}{2} \), puis \( y = \dfrac{B}{2x} \).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Racines \( n \)-ièmes de l'unité</h3>
+        <p>Les solutions de \( z^n = 1 \) sont les \( n \) racines :</p>
+        <div class="formula">\[ z_k = e^{2ik\pi/n} = \omega^k, \quad k = 0, 1, \ldots, n-1 \quad \text{où } \omega = e^{2i\pi/n} \]</div>
+        <p>Elles sont régulièrement réparties sur le cercle unité (sommets d'un polygone régulier à \(n\) côtés).</p>
+        <p><strong>Propriété fondamentale — somme nulle :</strong></p>
+        <div class="formula">\[ \sum_{k=0}^{n-1} z_k = \sum_{k=0}^{n-1} \omega^k = 0 \quad (n \geq 2) \]</div>
+        <p><em>Preuve :</em> c'est une suite géométrique de raison \(\omega \neq 1\), donc la somme vaut \(\dfrac{1 - \omega^n}{1 - \omega} = \dfrac{1-1}{1-\omega} = 0\).</p>
+        <p><strong>Produit :</strong> \(\displaystyle\prod_{k=0}^{n-1} z_k = (-1)^{n+1}\) (relations coefficients-racines sur \(X^n - 1\)).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Généralisation : Racines \(n\)-ièmes de \(Z = R\,e^{i\Phi}\)</h3>
+        <p>Pour trouver les \( n \) racines d'un complexe quelconque \( Z = R\,e^{i\Phi} \) (\(R > 0\)) :</p>
+        <div class="formula">\[ z_k = \sqrt[n]{R}\;\exp\!\left(i\,\frac{\Phi + 2k\pi}{n}\right) \quad \text{pour } k = 0, 1, \ldots, n-1 \]</div>
+        <ul>
+            <li>Toutes les racines ont le même module \( \sqrt[n]{R} \).</li>
+            <li>Leurs arguments sont en <strong>progression arithmétique</strong> de raison \( \dfrac{2\pi}{n} \).</li>
+            <li>Cas particulier \(Z=1\) : \(R=1\), \(\Phi=0\) → on retrouve les racines de l'unité.</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Module : définition et propriétés</h3>
+        <p>Pour \(z = a+ib\) : \(|z| = \sqrt{a^2+b^2}\). Propriétés fondamentales :</p>
+        <div class="formula">\[ |z| = |-z| = |\bar{z}|, \qquad |z|^2 = z\bar{z} \]</div>
+        <ul>
+            <li>\(|z_1 z_2| = |z_1||z_2|\) et \(\left|\dfrac{z_1}{z_2}\right| = \dfrac{|z_1|}{|z_2|}\) (\(z_2 \neq 0\)).</li>
+            <li><strong>Inégalité triangulaire :</strong> \(|z_1 + z_2| \leq |z_1| + |z_2|\).</li>
+            <li><strong>Inégalité triangulaire inverse :</strong> \(\big||z_1| - |z_2|\big| \leq |z_1 - z_2|\).</li>
+        </ul>
+        <p><strong>Astuce calcul :</strong> pour trouver \(|z|^2\), multiplier \(z\) par son conjugué — plus rapide que de développer \(a^2+b^2\).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Argument et conjugué</h3>
+        <div class="formula">\[ \arg(z_1 z_2) = \arg(z_1) + \arg(z_2) \pmod{2\pi} \]</div>
+        <div class="formula">\[ \overline{z_1 + z_2} = \bar{z}_1 + \bar{z}_2, \qquad \overline{z_1 z_2} = \bar{z}_1 \bar{z}_2, \qquad |z|^2 = z\bar{z} \]</div>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Caractérisation par le conjugué</h3>
+        <p>Soit \( z \in \mathbb{C} \) :</p>
+        <ul>
+            <li><strong>\( z \) est un réel :</strong> \( z \in \mathbb{R} \iff z = \bar{z} \).</li>
+            <li><strong>\( z \) est un imaginaire pur :</strong> \( z \in i\mathbb{R} \iff z = -\bar{z} \).</li>
+        </ul>
+        <p><em>Utile pour démontrer qu'une expression complexe est réelle ou imaginaire pure sans la développer entièrement.</em></p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Géométrie avec les Complexes</h3>
+        <ul>
+            <li><strong>Vecteur :</strong> L'affixe du vecteur \(\vec{AB}\) est \(z_B - z_A\).</li>
+            <li><strong>Distance :</strong> La distance \(AB = |z_B - z_A|\).</li>
+            <li><strong>Milieu :</strong> L'affixe du milieu de \([AB]\) est \(\dfrac{z_A + z_B}{2}\).</li>
+            <li><strong>Angle orienté \((\vec{AB}, \vec{AC})\) :</strong> \(\arg\!\left(\dfrac{z_C - z_A}{z_B - z_A}\right)\) (modulo \(2\pi\)).</li>
+            <li><strong>Colinéarité :</strong> \(A, B, C\) alignés \(\iff \dfrac{z_C - z_A}{z_B - z_A} \in \mathbb{R}\).</li>
+        </ul>
+    </div>
+
+    <div class="card card-method">
+        <h3>Linéarisation de \(\cos^n\theta\) et \(\sin^n\theta\)</h3>
+        <p>On utilise les relations fondamentales :</p>
+        <div class="formula">\[ 2\cos\theta = e^{i\theta} + e^{-i\theta}, \qquad 2i\sin\theta = e^{i\theta} - e^{-i\theta} \]</div>
+        <p><strong>Méthode (section 3.4 du poly) :</strong></p>
+        <ol class="steps">
+            <li>Écrire \((2\cos\theta)^n = (e^{i\theta}+e^{-i\theta})^n\) et développer par le binôme de Newton.</li>
+            <li>Regrouper les termes conjugués : \(e^{ik\theta} + e^{-ik\theta} = 2\cos(k\theta)\).</li>
+            <li>Diviser par \(2^n\) pour obtenir \(\cos^n\theta\) comme combinaison de \(\cos(k\theta)\).</li>
+        </ol>
+        <p><strong>Pour \(\sin^n\theta\) :</strong> même méthode avec \((2i\sin\theta)^n = (e^{i\theta}-e^{-i\theta})^n\), puis \(e^{ik\theta} - e^{-ik\theta} = 2i\sin(k\theta)\). Attention au facteur \(i^n\).</p>
+        <table style="margin-top:0.8rem">
+            <thead><tr><th>Expression</th><th>Linéarisation</th></tr></thead>
+            <tbody>
+                <tr><td>\(\cos^2\theta\)</td><td>\(\dfrac{1+\cos(2\theta)}{2}\)</td></tr>
+                <tr><td>\(\sin^2\theta\)</td><td>\(\dfrac{1-\cos(2\theta)}{2}\)</td></tr>
+                <tr><td>\(\cos^3\theta\)</td><td>\(\dfrac{3\cos\theta+\cos(3\theta)}{4}\)</td></tr>
+                <tr><td>\(\sin^3\theta\)</td><td>\(\dfrac{3\sin\theta-\sin(3\theta)}{4}\)</td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top:0.8rem"><strong>Application inverse (formules de duplication/addition) :</strong> on peut aussi exprimer \(\cos(n\theta)\) et \(\sin(n\theta)\) en puissances de \(\cos\theta\) et \(\sin\theta\) via Moivre.</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Transformations géométriques dans \(\mathbb{C}\)</h3>
+        <p>La multiplication par un complexe \(w = \rho e^{i\varphi}\) est une transformation du plan :</p>
+        <table>
+            <thead><tr><th>Transformation</th><th>Complexe \(w\)</th><th>Effet</th></tr></thead>
+            <tbody>
+                <tr><td>Rotation d'angle \(\varphi\) (centre O)</td><td>\(e^{i\varphi}\)</td><td>\(z \mapsto e^{i\varphi} z\)</td></tr>
+                <tr><td>Homothétie de rapport \(\rho\) (centre O)</td><td>\(\rho \in \mathbb{R}^+\)</td><td>\(z \mapsto \rho z\)</td></tr>
+                <tr><td>Similitude directe (rotation + homothétie)</td><td>\(w = \rho e^{i\varphi}\)</td><td>\(z \mapsto w z\)</td></tr>
+                <tr><td>Translation de vecteur \(\vec{u} \leftrightarrow a\)</td><td>\(a \in \mathbb{C}\)</td><td>\(z \mapsto z + a\)</td></tr>
+                <tr><td>Symétrie par rapport à l'axe réel</td><td>Conjugaison</td><td>\(z \mapsto \bar{z}\)</td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top:0.8rem"><strong>Rotation de centre \(\Omega \leftrightarrow \omega\) :</strong> \(z' - \omega = e^{i\varphi}(z - \omega)\).</p>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CHAPITRE 8 — Factorisation
+══════════════════════════════════════════════════════ -->
+<section id="chap8" class="chapter">
+    <div class="chapter-header">
+        <div class="chap-label">Chapitre 8</div>
+        <h2>Factorisation dans \( \mathbb{R} \) et dans \( \mathbb{C} \)</h2>
+        <p>Théorème fondamental de l'algèbre, irréductibles réels et complexes.</p>
+    </div>
+
+    <div class="card card-def">
+        <h3>Définition de \(\mathbb{C}[X]\) et racines</h3>
+        <ul>
+            <li><strong>\(\mathbb{C}[X]\) :</strong> Ensemble des polynômes \( P = \sum_{k=0}^n a_k X^k \) où les coefficients \( a_k \) sont des <strong>nombres complexes</strong>.</li>
+            <li><strong>Stabilité :</strong> Toutes les propriétés du Chapitre 6 (division euclidienne, PGCD, Bézout, multiplicité) restent valables dans \(\mathbb{C}[X]\).</li>
+            <li><strong>Racine :</strong> \( \alpha \in \mathbb{C} \) est racine de \( P \) si \( P(\alpha) = 0 \).</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Définition de l'irréductibilité</h3>
+        <p>Un polynôme \( P \) est dit <strong>irréductible</strong> (dans \(\mathbb{R}[X]\) ou \(\mathbb{C}[X]\)) s'il est non constant et si ses seuls diviseurs sont les polynômes constants et les polynômes de la forme \( \lambda P \) (avec \( \lambda \neq 0 \)).</p>
+        <p>Autrement dit : \(P\) est irréductible s'il ne peut s'écrire comme produit de deux polynômes de degré strictement inférieur au sien.</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Exemple type : Factorisation dans \(\mathbb{R}[X]\) vs \(\mathbb{C}[X]\)</h3>
+        <p>Soit \( P = X^3 - 2X^2 + \frac{7}{2}X - \frac{5}{2} \). On vérifie \( P(1) = 0 \), donc \( (X-1) \) divise \( P \). Par division euclidienne : \( P = (X-1)(X^2 - X + \frac{5}{2}) \).</p>
+        <div class="grid-2" style="margin-top: 0.8rem;">
+            <div>
+                <p><strong>Dans \(\mathbb{R}[X]\) :</strong></p>
+                <p>\( \Delta = 1 - 10 = -9 < 0 \) donc le trinôme est <em>irréductible</em> :</p>
+                <div class="formula">\[ P = (X-1)\!\left(X^2 - X + \tfrac{5}{2}\right) \]</div>
+            </div>
+            <div>
+                <p><strong>Dans \(\mathbb{C}[X]\) :</strong></p>
+                <p>Les racines complexes sont \( z = \frac{1 \pm 3i}{2} \) :</p>
+                <div class="formula">\[ P = (X-1)\!\left(X - \tfrac{1-3i}{2}\right)\!\left(X - \tfrac{1+3i}{2}\right) \]</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Théorème fondamental de l'algèbre (D'Alembert-Gauss)</h3>
+        <p>Tout polynôme \( P \in \mathbb{C}[X] \) de degré \( n \geq 1 \) admet <strong>exactement \( n \) racines complexes</strong> (comptées avec multiplicité).</p>
+        <div class="formula">\[ P(X) = a_n(X - z_1)(X - z_2)\cdots(X - z_n), \quad z_i \in \mathbb{C} \]</div>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Irréductibles dans \( \mathbb{C}[X] \) et \( \mathbb{R}[X] \)</h3>
+        <div class="grid-2">
+            <div>
+                <p><strong>Dans \( \mathbb{C}[X] \) :</strong></p>
+                <p>Les seuls irréductibles sont les polynômes de <strong>degré 1</strong> : \( (X - z) \).</p>
+            </div>
+            <div>
+                <p><strong>Dans \( \mathbb{R}[X] \) :</strong></p>
+                <p>Les irréductibles sont les polynômes de <strong>degré 1</strong> et les <strong>trinômes du second degré</strong> à discriminant strictement négatif : \( X^2 + pX + q \) avec \( p^2 - 4q < 0 \).</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-method">
+        <h3>Racines complexes conjuguées</h3>
+        <p>Si \( P \in \mathbb{R}[X] \) et \( z = a+ib \) (avec \( b \neq 0 \)) est racine de \( P \), alors \( \bar{z} = a-ib \) est aussi racine, avec la même multiplicité.</p>
+        <div class="formula">\[ (X - z)(X - \bar{z}) = X^2 - 2a\,X + (a^2 + b^2) \in \mathbb{R}[X] \]</div>
+    </div>
+
+    <div class="card card-method">
+        <h3>Décomposition complète dans \( \mathbb{R}[X] \)</h3>
+        <p>Tout polynôme \( P \in \mathbb{R}[X] \) se factorise <strong>de façon unique</strong> (à l'ordre près) comme :</p>
+        <div class="formula">\[ P(X) = a_n \prod_{i} (X - r_i)^{m_i} \prod_{j} (X^2 + p_j X + q_j)^{n_j} \]</div>
+        <p>où les \( r_i \) sont les racines réelles et les trinômes ont discriminant \( < 0 \).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Cas particulier : factorisation de \(X^n - 1\) dans \(\mathbb{R}[X]\)</h3>
+        <p>Les racines de \(X^n - 1\) sont les \(n\) racines de l'unité \(e^{i\frac{2k\pi}{n}}\) pour \(k = 0, \ldots, n-1\). Pour obtenir des facteurs à <strong>coefficients réels</strong>, on regroupe les racines conjuguées :</p>
+        <div class="formula">\[ \left(X - e^{i\theta}\right)\!\left(X - e^{-i\theta}\right) = X^2 - 2\cos(\theta)\,X + 1 \]</div>
+        <ul>
+            <li>Si \(n\) est <strong>impair</strong> : \(X^n - 1 = (X-1)\displaystyle\prod_{k=1}^{(n-1)/2}\!\left(X^2 - 2\cos\tfrac{2k\pi}{n}\,X + 1\right)\).</li>
+            <li>Si \(n\) est <strong>pair</strong> : \(X^n - 1 = (X-1)(X+1)\displaystyle\prod_{k=1}^{n/2-1}\!\left(X^2 - 2\cos\tfrac{2k\pi}{n}\,X + 1\right)\).</li>
+        </ul>
+        <p>On obtient ainsi des facteurs irréductibles dans \(\mathbb{R}[X]\).</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>Décomposition en éléments simples (fractions rationnelles)</h3>
+        <p>Si \( F = \frac{P}{Q} \) avec \( \deg P < \deg Q \) et \( Q \) factorisé, on écrit :</p>
+        <div class="formula">\[ \frac{P(X)}{(X-a)^m \cdots} = \frac{A_1}{X-a} + \frac{A_2}{(X-a)^2} + \cdots + \frac{A_m}{(X-a)^m} + \cdots \]</div>
+        <p>Pour trouver les coefficients : multiplier des deux côtés par \( (X-a)^k \), puis évaluer en \( X = a \), ou identifier par égalité de polynômes.</p>
+    </div>
+
+    <div class="card card-method">
+        <h3>DES avec facteur irréductible du 2nd degré dans \(\mathbb{R}[X]\)</h3>
+        <p>Si \(Q(X)\) contient un facteur irréductible \((X^2+pX+q)\) (discriminant \(< 0\)), la DES dans \(\mathbb{R}(X)\) comporte un terme de la forme \(\dfrac{aX+b}{X^2+pX+q}\) (et non \(\dfrac{a}{X+\cdot}+\dfrac{b}{X+\cdot}\)).</p>
+        <p><strong>Exemple :</strong> Décomposer \(\dfrac{2X}{(X+1)(X^2+1)}\) :</p>
+        <div class="formula">\[ \frac{2X}{(X+1)(X^2+1)} = \frac{A}{X+1} + \frac{BX+C}{X^2+1} \]</div>
+        <ol class="steps">
+            <li>Multiplier par \((X+1)\) et évaluer en \(X=-1\) : \(A = \frac{-2}{2} = -1\).</li>
+            <li>Réduire au même dénominateur et identifier : \(B=1\), \(C=1\).</li>
+            <li>Résultat : \(\dfrac{-1}{X+1} + \dfrac{X+1}{X^2+1}\).</li>
+        </ol>
+        <p><strong>Intégration :</strong> \(\displaystyle\int \frac{aX+b}{X^2+pX+q}\,dX\) se calcule en complétant le carré pour ramener à \(\arctan\) et \(\ln\).</p>
+    </div>
+
+    <div class="card card-error">
+        <h3>⚠️ Erreurs fréquentes</h3>
+        <ul>
+            <li>Oublier de vérifier si \( \deg P < \deg Q \) avant la décomposition (sinon effectuer la division euclidienne).</li>
+            <li>Oublier de chercher les racines complexes par conjugaison dans \( \mathbb{R}[X] \).</li>
+            <li>Confondre factorisation dans \( \mathbb{R} \) et dans \( \mathbb{C} \) (les irréductibles sont différents).</li>
+        </ul>
+    </div>
+
+    <div class="card method">
+        <h3>Équations du Second Degré dans \(\mathbb{C}\)</h3>
+        <p>Pour résoudre \(az^2 + bz + c = 0\) avec \(a, b, c \in \mathbb{C}\) :</p>
+        <ol>
+            <li>Calculer \(\Delta = b^2 - 4ac\).</li>
+            <li>Chercher \(\delta = x+iy\) tel que \(\delta^2 = \Delta\) (via le système à 3 équations du Ch. 7).</li>
+            <li>Les racines sont \(z_1 = \frac{-b-\delta}{2a}\) et \(z_2 = \frac{-b+\delta}{2a}\).</li>
+        </ol>
+        <p><strong>Relations Coefficients-Racines :</strong> \(z_1 + z_2 = -\frac{b}{a}\) et \(z_1 z_2 = \frac{c}{a}\).</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Propriétés des polynômes réels</h3>
+        <ul>
+            <li><strong>Conjugué :</strong> Si \(P \in \mathbb{R}[X]\), alors \(P(\bar{\alpha}) = \overline{P(\alpha)}\). Si \(\alpha\) est racine, alors \(\bar{\alpha}\) l'est aussi[cite: 4279, 4280, 4282].</li>
+            <li><strong>Racine réelle :</strong> Tout polynôme de degré <strong>impair</strong> à coefficients réels admet au moins une racine réelle[cite: 4283, 4284].</li>
+        </ul>
+    </div>
+
+    <div class="card card-def">
+        <h3>Polynômes Scindés</h3>
+        <p>Un polynôme est dit <strong>scindé</strong> s'il admet une factorisation en produit de facteurs de degré 1[cite: 1905].</p>
+        <p><strong>Théorème :</strong> Tout polynôme de \(\mathbb{C}[X]\) est scindé (Théorème de D'Alembert-Gauss)[cite: 1907].</p>
+    </div>
+
+    <div class="card card-thm">
+        <h3>Relations Coefficients-Racines</h3>
+        <p>Pour un polynôme \(P = aX^2 + bX + c\) de racines \(z_1, z_2\)[cite: 1888, 1889]:</p>
+        <ul>
+            <li><strong>Somme :</strong> \(S = z_1 + z_2 = -\frac{b}{a}\)[cite: 1884, 1890].</li>
+            <li><strong>Produit :</strong> \(P = z_1 \times z_2 = \frac{c}{a}\)[cite: 1884, 1891].</li>
+        </ul>
+        <p>Ces racines sont les solutions de \(z^2 - Sz + P = 0\)[cite: 1887].</p>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     QUIZ
+══════════════════════════════════════════════════════ -->
+<section id="quiz" class="chapter">
+    <div class="chapter-header">
+        <div class="chap-label">Auto-évaluation</div>
+        <h2>⚡ Quiz de révision</h2>
+        <p>15 questions sur l'ensemble des chapitres.</p>
+    </div>
+
+    <div id="quiz-container"></div>
+
+    <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <button class="btn-quiz" onclick="checkQuiz()">Vérifier mes réponses</button>
+        <button class="btn-reset" onclick="resetQuiz()">Recommencer</button>
+    </div>
+
+    <div id="quiz-score"></div>
+</section>
+
+</main>
+
+<script>
+// ── NAVIGATION ─────────────────────────────────────────
+function showChapter(id) {
+    document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => {
+        if (l.getAttribute('onclick') && l.getAttribute('onclick').includes(`'${id}'`)) {
+            l.classList.add('active');
+        }
+    });
+    if (id === 'quiz') buildQuiz();
+    window.scrollTo(0, 0);
+    // close mobile sidebar
+    document.getElementById('sidebar').classList.remove('open');
+}
+
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ── QUIZ DATA ───────────────────────────────────────────
+const quizData = [
+    {
+        q: "Qu'est-ce que l'intérieur d'un ensemble A ⊂ ℝ² ?",
+        opts: ["Le plus petit fermé contenant A","Le plus grand ouvert contenu dans A","La frontière de A","L'ensemble des points isolés de A"],
+        ans: 1,
+        exp: "L'intérieur est le plus grand ouvert contenu dans A ; un point est intérieur si une boule entière est incluse dans A."
+    },
+    {
+        q: "La limite de f(x,y) = xy/(x²+y²) en (0,0) :",
+        opts: ["Vaut 0","Vaut 1/2","N'existe pas","Vaut 1"],
+        ans: 2,
+        exp: "Sur y=0 : limite vaut 0. Sur y=x : limite vaut 1/2. Les limites diffèrent, donc la limite n'existe pas."
+    },
+    {
+        q: "Quelle est l'implication vraie entre régularité et continuité ?",
+        opts: ["Continuité ⟹ Différentiabilité","C¹ ⟹ Différentiable ⟹ Continue","Différentiabilité ⟹ C¹","Continuité ⟹ C¹"],
+        ans: 1,
+        exp: "La hiérarchie correcte est : f ∈ C¹ ⟹ différentiable ⟹ continue. Les réciproques sont fausses."
+    },
+    {
+        q: "Si det(Hessienne) = 0 en un point critique, que peut-on dire ?",
+        opts: ["C'est un point-selle","C'est un minimum local","C'est un maximum local","On ne peut pas conclure directement"],
+        ans: 3,
+        exp: "Le cas Δ=0 est indéterminé : il faut étudier directement le signe de f(a+h,b+k)-f(a,b)."
+    },
+    {
+        q: "Quel est l'ordre des implications correct ?",
+        opts: ["Différentiabilité ⟹ C¹ ⟹ Continuité","C¹ ⟹ Différentiabilité ⟹ Continuité","Continuité ⟹ Différentiabilité ⟹ C¹","C¹ ⟺ Différentiabilité"],
+        ans: 1,
+        exp: "C¹ (dérivées partielles continues) ⟹ différentiable ⟹ continue."
+    },
+    {
+        q: "Pour diagonaliser une matrice A, on cherche les racines de :",
+        opts: ["det(A)","Tr(A)","det(A − λI)","det(A + λI)"],
+        ans: 2,
+        exp: "Le polynôme caractéristique est P_A(λ) = det(A − λI). Ses racines sont les valeurs propres."
+    },
+    {
+        q: "i⁴² est égal à :",
+        opts: ["1","−1","i","−i"],
+        ans: 1,
+        exp: "42 mod 4 = 2, donc i⁴² = i² = −1."
+    },
+    {
+        q: "Un ensemble est compact dans ℝ² s'il est :",
+        opts: ["Ouvert et borné","Fermé et connexe","Fermé et borné","Borné et connexe par arcs"],
+        ans: 2,
+        exp: "Dans ℝⁿ, compact = fermé + borné (théorème de Heine-Borel)."
+    },
+    {
+        q: "Le théorème de Weierstrass garantit que f continue sur un compact :",
+        opts: ["Est différentiable","Est bornée et atteint ses bornes","A un unique extremum","Est C¹"],
+        ans: 1,
+        exp: "Weierstrass : f continue sur compact ⟹ f bornée et elle atteint son max et son min."
+    },
+    {
+        q: "Si A et B sont premiers entre eux, le théorème de Bézout affirme qu'il existe U, V tels que :",
+        opts: ["AU + BV = 0","AU − BV = 1","AU + BV = 1","A²U + B²V = 1"],
+        ans: 2,
+        exp: "Bézout : gcd(A,B)=1 ⟺ ∃U,V ∈ ℝ[X] tels que AU + BV = 1."
+    },
+    {
+        q: "Dans ℂ[X], les polynômes irréductibles sont :",
+        opts: ["Les polynômes de degré 1 et 2","Uniquement les polynômes de degré 1","Les polynômes de degré impair","Les polynômes sans racines réelles"],
+        ans: 1,
+        exp: "Par le théorème de D'Alembert-Gauss, tout polynôme de degré ≥ 2 se factorise dans ℂ."
+    },
+    {
+        q: "Si z = a+ib est racine d'un polynôme à coefficients réels, alors :",
+        opts: ["iz est aussi racine","−z est aussi racine","ā = a−ib est aussi racine","1/z est aussi racine"],
+        ans: 2,
+        exp: "Les racines complexes d'un polynôme réel viennent toujours par paires conjuguées z et z̄."
+    },
+    {
+        q: "La dérivée directionnelle D_u f(a,b) selon u unitaire vaut :",
+        opts: ["‖∇f(a,b)‖","∇f(a,b) × u","∇f(a,b) · u","‖∇f(a,b) − u‖"],
+        ans: 2,
+        exp: "D_u f = ∇f · u = (∂f/∂x)u_x + (∂f/∂y)u_y (produit scalaire du gradient et du vecteur unitaire)."
+    },
+    {
+        q: "Le gradient ∇f est :",
+        opts: ["Tangent aux courbes de niveau","Perpendiculaire aux courbes de niveau","Nul en tout point régulier","Égal à la différentielle de f"],
+        ans: 1,
+        exp: "∇f est toujours perpendiculaire (orthogonal) aux courbes de niveau de f."
+    },
+    {
+        q: "Quand peut-on appliquer le théorème de Schwarz à f ?",
+        opts: ["f est seulement continue","f est différentiable","f est de classe C²","f est analytique"],
+        ans: 2,
+        exp: "Schwarz requiert que les dérivées partielles croisées soient continues, c'est-à-dire f ∈ C²."
+    }
+];
+
+let quizBuilt = false;
+
+function buildQuiz() {
+    if (quizBuilt) return;
+    quizBuilt = true;
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+    quizData.forEach((item, i) => {
+        let optsHtml = item.opts.map((opt, j) =>
+            `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>`
+        ).join('');
+        container.innerHTML += `
+        <div class="quiz-item" id="qi-${i}">
+            <div class="quiz-question">Q${i+1}. ${item.q}</div>
+            <div class="quiz-options">${optsHtml}</div>
+            <div class="quiz-feedback" id="qf-${i}"></div>
+        </div>`;
+    });
+}
+
+function checkQuiz() {
+    let score = 0;
+    quizData.forEach((item, i) => {
+        const sel = document.querySelector(`input[name="q${i}"]:checked`);
+        const qi = document.getElementById(`qi-${i}`);
+        const qf = document.getElementById(`qf-${i}`);
+        qi.classList.remove('correct','wrong');
+        if (sel && parseInt(sel.value) === item.ans) {
+            score++;
+            qi.classList.add('correct');
+            qf.textContent = '✅ ' + item.exp;
+        } else {
+            qi.classList.add('wrong');
+            const corr = item.opts[item.ans];
+            qf.textContent = `❌ Bonne réponse : "${corr}". ${item.exp}`;
+        }
+    });
+    const total = quizData.length;
+    const pct = Math.round(score/total*100);
+    const scoreDiv = document.getElementById('quiz-score');
+    scoreDiv.style.display = 'block';
+    scoreDiv.className = pct === 100 ? 'score-perfect' : pct >= 60 ? 'score-good' : 'score-bad';
+    const msg = pct === 100 ? '🎉 Parfait !' : pct >= 60 ? '👍 Bon travail !' : '📚 Continue à réviser !';
+    scoreDiv.innerHTML = `${msg} Score : <strong>${score} / ${total}</strong> (${pct}%)`;
+    scoreDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetQuiz() {
+    quizData.forEach((_, i) => {
+        const qi = document.getElementById(`qi-${i}`);
+        if (!qi) return;
+        qi.classList.remove('correct','wrong');
+        document.getElementById(`qf-${i}`).textContent = '';
+        document.querySelectorAll(`input[name="q${i}"]`).forEach(r => r.checked = false);
+    });
+    const scoreDiv = document.getElementById('quiz-score');
+    scoreDiv.style.display = 'none';
+    scoreDiv.textContent = '';
+}
+</script>
+</body>
+</html>
